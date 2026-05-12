@@ -1053,8 +1053,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::World
   Player: {fileID: 518339295}
-  Enemytest: 10
-  Enemy: {fileID: 629307106614651392, guid: 8f5bad4903412c64c944e45f539c7ce3, type: 3}
+  Enemy:
+  - {fileID: 629307106614651392, guid: 8f5bad4903412c64c944e45f539c7ce3, type: 3}
+  Enemytest: 0
+  Dificulty: 0
+  DificultyMultiplier: 1
+  MinRadius: 10
+  MaxRadius: 15
   enemyList: []
 --- !u!4 &1620320052
 Transform:
