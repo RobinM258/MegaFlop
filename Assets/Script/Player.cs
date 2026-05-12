@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     [Header("Player Stats")]
+    public ItemData[] item;
     public float Health;
     public float xp;
     public float Level;
@@ -14,9 +15,10 @@ public class Player : MonoBehaviour
     public float CritMultiplier;
     public float AttaqueSpeed;
     public float Armor;
+    public float Chance;
     public float VulnerabilityTime;
     public float Thorns;
-
+    public float CollectDistance;
     public float PlayerX;
     public float PlayerY;
 
@@ -57,13 +59,15 @@ public class Player : MonoBehaviour
         
         if (ui != null)
         {
-            ui.OnCancel(value); 
+            if (!ui.CheckPannel() && !ui.Pannels[0].activeSelf)
+                ui.OpenPannel(0, true);
+            else if (ui.Pannels[0].activeSelf)
+                ui.ClosePannel(0, false);
         }
     }
 
     public void OnTab(InputValue value)
     {
-        Debug.Log("Spawner test");
         WorldScript.Spawner();
     }
 
@@ -92,6 +96,27 @@ public class Player : MonoBehaviour
             if (Thorns > 0)
                 EnemyScript.GetDamage(Thorns);
         }
-
     }
+
+    public void AddXp(float nb)
+    {
+        xp += nb;
+        while (xp >= GetXPRequired(Level))
+        {
+            LevelUp();
+        }
+    }
+    public void LevelUp()
+    {
+        UIManager ui = WorldObj.GetComponent<UIManager>();
+        xp -= GetXPRequired(Level);
+        ui.SetLevelUpBTn();
+        ui.OpenPannel(1, true);
+        Level++;
+    }
+    public float GetXPRequired(float level)
+    {
+        return Mathf.Round(WorldScript.baseXP * Mathf.Pow(level, WorldScript.exponent));
+    }
+
 }

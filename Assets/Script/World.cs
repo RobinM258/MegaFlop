@@ -5,37 +5,56 @@ using System.Collections.Generic;
 public class World : MonoBehaviour
 {
     [Header("Global Parameter")]
-    public GameObject Player;
+    public GameObject player;
     public GameObject[] Enemy;
+    public GameObject[] XpOrb;
+    public ItemData[] item;
+    public ItemData[] itemRemains;
 
     public int Enemytest = 0;
     [Header("Dificulty Parameter")]
     public float Dificulty;
     public float DificultyMultiplier;
+    public float DificultyAugmentation;
     [Header("Spawn Parameter")]
     public float MinRadius;
     public float MaxRadius;
-    private float SpawnRate;
-    //private int MaxEnemy = 10;
-
-
+    private int SpawnRate;
+    private int MaxEnemy = 1000;
+    private float RefreshTime = 5.0f;
+    private float timer;
+    private Player playerScript;
     public List<GameObject> enemyList = new List<GameObject>();
+    public List<GameObject> orbList = new List<GameObject>();
     private BasicEnemy EnemyScript;
+
+    [Header("Réglage XP")]
+    public float baseXP = 5f;
+    public float exponent = 1.5f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ItemData[] itemRemains = item;
+        playerScript = player.GetComponent<Player>();
+        SpawnRate = 3;
         for (int i = 0; i < Enemytest; i++)
         {
             GameObject newEnemy = Instantiate(Enemy[0], new Vector3(4, 4, 0), Quaternion.identity);
             enemyList.Add(newEnemy);
             EnemyScript = newEnemy.GetComponent<BasicEnemy>();
-            EnemyScript.PlayerObj = Player;
+            EnemyScript.PlayerObj = player;
             EnemyScript.WorldObj = this.gameObject;
         } 
     }
 
     void Update()
     {
+        timer += Time.deltaTime;
+        if (timer > RefreshTime)
+        {
+            Spawner();
+            timer = 0f;
+        }
         EnemyHandler();
     }
 
@@ -43,8 +62,23 @@ public class World : MonoBehaviour
     {
         for (int i = 0; i < enemyList.Count; i++)
         {
-            Vector3 direction = Player.transform.position - enemyList[i].transform.position;
+            Vector3 direction = player.transform.position - enemyList[i].transform.position;
             enemyList[i].transform.position += direction.normalized * EnemyScript.MoveSpeed * Time.deltaTime;
+        }
+
+        for (int i = 0; i < orbList.Count; i++)
+        {
+            Vector3 direction = player.transform.position - orbList[i].transform.position;
+            if (direction.magnitude <= playerScript.CollectDistance && direction.magnitude > 1)
+                orbList[i].transform.position += direction.normalized * 10 * Time.deltaTime;
+            else if (direction.magnitude <= 1)
+            {
+                GameObject current = orbList[i];
+                XpOrb xp = current.GetComponent<XpOrb>();
+                playerScript.AddXp(xp.xpValue);
+                orbList.Remove(current);
+                Destroy(current);
+            }
         }
     }
 
@@ -53,6 +87,11 @@ public class World : MonoBehaviour
         if (enemyList.Contains(enemy))
         {
             enemyList.Remove(enemy);
+            if (Random.Range(0, 2) != 0)
+            {
+                GameObject newOrb = Instantiate(XpOrb[0], enemy.transform.position, Quaternion.identity);
+                orbList.Add(newOrb);
+            }
             Destroy(enemy);
         }
     }
@@ -65,28 +104,24 @@ public class World : MonoBehaviour
     public void Spawner()
     {
         float RealDificulty = Dificulty * DificultyMultiplier;
-        // if (RealDificulty >= 4)
-        //     Debug.Log("Tu gagnes une épée !");
-        // if (RealDificulty >= 3)
-        //     Debug.Log("Tu gagnes un bouclier !");
-        if (RealDificulty >= 2)
-            Debug.Log("Tu gagnes une potion !");
-        else
+        for (int i = 0; i <= SpawnRate; i++)
         {
-            OneSpawnRadius(MinRadius, MaxRadius, Enemy[0]);
+            if (MaxEnemy > enemyList.Count)
+            {
+                OneSpawnRadius(MinRadius, MaxRadius, Enemy[0]);
+            }
         }
-            Debug.Log("Tu ne gagnes rien !");   
     }
 
     void OneSpawnRadius(float min,float max, GameObject enemy)
     {
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
         float randomDistance = Random.Range(min, max);
-        Vector3 spawnPosition = Player.transform.position + new Vector3(randomDirection.x, 0, randomDirection.y) * randomDistance;
+        Vector3 spawnPosition = player.transform.position + new Vector3(randomDirection.x, randomDirection.y, 0) * randomDistance;
         GameObject newEnemy = Instantiate(Enemy[0], spawnPosition, Quaternion.identity);
         enemyList.Add(newEnemy);
         EnemyScript = newEnemy.GetComponent<BasicEnemy>();
-        EnemyScript.PlayerObj = Player;
+        EnemyScript.PlayerObj = player;
         EnemyScript.WorldObj = this.gameObject;
     }
     
