@@ -25,6 +25,7 @@ public class BasicEnemy : MonoBehaviour
     {
 
     }
+    
     public void GetDamage(float damage)
     {
         if (damage >= Health)
