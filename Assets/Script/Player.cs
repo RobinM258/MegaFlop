@@ -28,20 +28,40 @@ public class Player : MonoBehaviour
     private Vector2 direction;
     private World WorldScript;
 
+    private Animator animator;
+
+    [Header("Movement Smoothing")]
+    public float AccelerationTime = 0.08f;
+    public float DecelerationTime = 0.12f;
+
+    private Vector2 currentVelocity;
+    private Vector2 velocitySmoothing;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HealCount.text = Health.ToString();
         WorldScript = WorldObj.GetComponent<World>();
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         HealCount.text = Health.ToString();
-        Vector3 deplacement = new Vector3(direction.x, direction.y, 0);
-        transform.position += deplacement * MoveSpeed * Time.deltaTime;
+    
+        Vector2 targetVelocity = direction.normalized * MoveSpeed;
+        float smoothTime = direction.sqrMagnitude > 0.001f ? AccelerationTime : DecelerationTime;
+    
+        currentVelocity = Vector2.SmoothDamp(
+            currentVelocity,
+            targetVelocity,
+            ref velocitySmoothing,
+            smoothTime
+        );
+    
+        transform.position += (Vector3)(currentVelocity * Time.deltaTime);
+    
         PlayerX = transform.position.x;
         PlayerY = transform.position.y;
     }
@@ -49,6 +69,15 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue value)
     {
         direction = value.Get<Vector2>();
+
+        bool isRunning = direction != Vector2.zero;
+        animator.SetBool("IsRunning", isRunning);
+
+        if (isRunning)
+        {
+            animator.SetFloat("XInput", direction.x);
+            animator.SetFloat("YInput", direction.y);
+        }
     }
 
     public void OnCancel(InputValue value)
