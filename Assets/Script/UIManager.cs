@@ -99,7 +99,6 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < LevelUpBtn.Length; i++)
         {
             int rdm = Random.Range(0, WorldScript.itemRemains.Length);
-            Debug.Log(rdm);
             tempoItem[i] = WorldScript.item[rdm];
             LevelUpBtn[i].GetComponentInChildren<TextMeshProUGUI>().text = WorldScript.item[rdm].itemName;
         }

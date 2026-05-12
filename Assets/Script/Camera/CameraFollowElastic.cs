@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class CameraFollowElastic : MonoBehaviour
 {
+    public GameObject WorldObj;
+    private UIManager UIManagerScript;
+
     public Transform target;
     public float smoothTime = 0.2f;
     public Vector3 baseOffset = new Vector3(0f, 0f, -10f);
@@ -12,6 +15,8 @@ public class CameraFollowElastic : MonoBehaviour
 
     void Start()
     {
+        UIManagerScript = WorldObj.GetComponent<UIManager>();
+
         if (target != null)
             lastTargetPos = target.position;
     }
@@ -19,24 +24,31 @@ public class CameraFollowElastic : MonoBehaviour
     void LateUpdate()
     {
         if (target == null) return;
+        if (!UIManagerScript.isPaused)
+        {
+            float dt = Time.deltaTime > 0 ? Time.deltaTime : Time.unscaledDeltaTime;
+            Vector3 targetVelocity = (target.position - lastTargetPos) / dt;
 
-        Vector3 targetVelocity = (target.position - lastTargetPos) / Time.deltaTime;
+            Vector3 dynamicOffset = new Vector3(
+                Mathf.Clamp(targetVelocity.x * 0.1f, -lookAhead.x, lookAhead.x),
+                Mathf.Clamp(targetVelocity.y * 0.1f, -lookAhead.y, lookAhead.y),
+                0f
+            );
 
-        Vector3 dynamicOffset = new Vector3(
-            Mathf.Clamp(targetVelocity.x * 0.1f, -lookAhead.x, lookAhead.x),
-            Mathf.Clamp(targetVelocity.y * 0.1f, -lookAhead.y, lookAhead.y),
-            0f
-        );
+            Vector3 desiredPosition = target.position + baseOffset + dynamicOffset;
 
-        Vector3 desiredPosition = target.position + baseOffset + dynamicOffset;
+            transform.position = Vector3.SmoothDamp(
+                transform.position,
+                desiredPosition,
+                ref velocity,
+                smoothTime
+            );
 
-        transform.position = Vector3.SmoothDamp(
-            transform.position,
-            desiredPosition,
-            ref velocity,
-            smoothTime
-        );
-
-        lastTargetPos = target.position;
+            lastTargetPos = target.position;
+        }
+        else
+        {
+            transform.position = target.position;
+        }
     }
 }
