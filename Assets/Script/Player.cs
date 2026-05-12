@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public float PlayerX;
     public float PlayerY;
 
+    [Header("Global Parameter")]
     public TMP_Text HealCount;
     public GameObject WorldObj;
 
@@ -58,6 +59,12 @@ public class Player : MonoBehaviour
         {
             ui.OnCancel(value); 
         }
+    }
+
+    public void OnTab(InputValue value)
+    {
+        Debug.Log("Spawner test");
+        WorldScript.Spawner();
     }
 
     public void GetDamage(float damage)

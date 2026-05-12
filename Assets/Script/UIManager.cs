@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
+
+    [Header("Player Stats")]
     public GameObject[] Pannels;
     public TMP_Text FPSCount;
 

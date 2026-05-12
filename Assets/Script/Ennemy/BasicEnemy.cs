@@ -8,6 +8,7 @@ public class BasicEnemy : MonoBehaviour
     public float MoveSpeed;
     public float Damage;
 
+    [Header("Global Parameter")]
     public GameObject PlayerObj;
     public GameObject WorldObj;
 
