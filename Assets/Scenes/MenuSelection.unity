@@ -508,6 +508,10 @@ MonoBehaviour:
   - {fileID: 1269266108}
   PreviousPannel: {fileID: 0}
   CurrentPannel: {fileID: 0}
+  Spell:
+  - {fileID: 11400000, guid: e2ae6e97241d1da408aab0a5fda73af3, type: 2}
+  - {fileID: 11400000, guid: 0e7dfebfd7b544f4a80c391f3675f28f, type: 2}
+  CurrentItem: {fileID: 0}
 --- !u!4 &89736107
 Transform:
   m_ObjectHideFlags: 0

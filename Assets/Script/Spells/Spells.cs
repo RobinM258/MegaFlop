@@ -25,8 +25,8 @@ public class Spells : MonoBehaviour
     {
         if (id == 0)
             SetAura();
-        else if (id == 1)
-            SetFireBall();            
+        // else if (id == 1)
+        //     SetFireBall();            
 
     }
     void SetAura()
@@ -36,10 +36,10 @@ public class Spells : MonoBehaviour
         nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
     }
 
-    void SetFireBall()
-    {
-        GameObject nouvelObjet = Instantiate(SpellPrefab[1], PlayerObj.transform);
-        nouvelObjet.transform.SetParent(PlayerObj.transform);
-        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
-    }
+    // void SetFireBall()
+    // {
+    //     GameObject nouvelObjet = Instantiate(SpellPrefab[1], PlayerObj.transform);
+    //     nouvelObjet.transform.SetParent(PlayerObj.transform);
+    //     nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
+    // }
 }
