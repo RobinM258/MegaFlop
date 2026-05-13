@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using TMPro;
+
 public class BasicEnemy : MonoBehaviour
 {
 
@@ -11,6 +13,8 @@ public class BasicEnemy : MonoBehaviour
     [Header("Global Parameter")]
     public GameObject PlayerObj;
     public GameObject WorldObj;
+    public GameObject DamageCounter;
+    public Transform monCanvas;
 
     private World WorldScript;
 
@@ -28,6 +32,13 @@ public class BasicEnemy : MonoBehaviour
     
     public void GetDamage(float damage)
     {
+        // Vector3 screenPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+        // GameObject damagecount = Instantiate(DamageCounter, monCanvas);
+
+        // damagecount.transform.position = screenPos;
+        // TextMeshProUGUI texte = damagecount.GetComponent<TextMeshProUGUI>();
+        // texte.text = damage.ToString();
+        // Destroy(damagecount, 2f);
         if (damage >= Health)
             WorldScript.KillEnemy(this.gameObject);
         else

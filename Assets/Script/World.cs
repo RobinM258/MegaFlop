@@ -10,6 +10,8 @@ public class World : MonoBehaviour
     public GameObject[] XpOrb;
     public ItemData[] item;
     public ItemData[] itemRemains;
+    public GameObject DamageCounter;
+    public Transform monCanvas;
 
     public int Enemytest = 0;
     [Header("Dificulty Parameter")]
@@ -89,7 +91,8 @@ public class World : MonoBehaviour
             enemyList.Remove(enemy);
             if (Random.Range(0, 2) != 0)
             {
-                GameObject newOrb = Instantiate(XpOrb[0], enemy.transform.position, Quaternion.identity);
+                Vector3 spawnPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -1.4f);
+                GameObject newOrb = Instantiate(XpOrb[0], spawnPos, Quaternion.identity);
                 orbList.Add(newOrb);
             }
             Destroy(enemy);
@@ -123,6 +126,8 @@ public class World : MonoBehaviour
         EnemyScript = newEnemy.GetComponent<BasicEnemy>();
         EnemyScript.PlayerObj = player;
         EnemyScript.WorldObj = this.gameObject;
+        EnemyScript.DamageCounter = DamageCounter;
+        EnemyScript.monCanvas = monCanvas;
     }
     
     void UnSpawnDist()

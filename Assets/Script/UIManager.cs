@@ -22,14 +22,20 @@ public class UIManager : MonoBehaviour
 
     private World WorldScript;
     private Player PlayerScript;
+    private Spells SpellScript;
 
 
     public ItemData[] tempoItem;
+    public ItemData newSpell;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         WorldScript = WorldObj.GetComponent<World>();
         PlayerScript = PlayerObj.GetComponent<Player>();
+        SpellScript = WorldObj.GetComponent<Spells>();
+        newSpell = GameData.FirstItem;
+        SpellScript.SetSpells(GameData.SelectedCharacterIndex);
+        PlayerScript.weaponsList.Add(newSpell);
     }
 
     // Update is called once per frame
@@ -67,6 +73,7 @@ public class UIManager : MonoBehaviour
             SwitchGame();
         Pannels[id].SetActive(true);
     }
+
     // Si all  est true ferme tout les pannel
     public void ClosePannel(int id, bool all)
     {
@@ -82,6 +89,7 @@ public class UIManager : MonoBehaviour
         if (Time.timeScale == 0f)
             SwitchGame();
     }
+
     // retourne  true si un pannel est ouvert
     public bool CheckPannel()
     {
@@ -94,11 +102,68 @@ public class UIManager : MonoBehaviour
         return false;
     }
 
+    // public bool SetUpgrade()
+    // {
+    //     List<string> statWeapon = new List<string> { "Damage", "AttackSpeed", "Size", "PersonalCrit", "PersonalCritMult", "Bounce" };
+    //     //List<string> statUpgrade = new List<string> { "Damage", "AttackSpeed", "Size" };
+    //     int rarity = Random(10000, 20000) * PlayerScript.Chance;
+    //     bool HasWeapons = false;
+    //     bool HasUpgrade = false;
+    //     if (PlayerScript.weaponsList.Count > 0)
+    //         HasWeapons = true;
+    //     if (PlayerScript.upgradeList.Count > 0)
+    //         HasUpgrade = true;
+    //     int rdm = 2;
+    //     if (HasUpgrade && HasWeapons)
+    //         rdm = Random(0, 1);
+    //     if (rdm = 2)
+    //         return false;
+    //     else if (HasUpgrade)
+    //     {
+    //         rdm = Random(0, PlayerScript.upgradeList.Count);
+            
+    //     }
+    //     else
+    //     {
+    //         rdm = Random(0, PlayerScript.weaponList.Count);
+    //         ItemData weapon = PlayerScript.weaponList[rdm];
+    //         string chosenStat = statNames[Random.Range(0, statNames.Count)];
+    //         switch (chosenStat)
+    //         {
+    //             case "Damage":
+    //                 weapon.Damage += 1f * (rarity / 10000 );
+    //                 break;
+    //             case "AttackSpeed":
+    //                 weapon.AttackSpeed += 0.2f * (rarity / 10000);
+    //                 break;
+    //             case "Size":
+    //                 weapon.Size += 0.1f * (rarity / 10000);
+    //                 break;
+    //             case "PersonalCrit":
+    //                 weapon.PersonalCrit += 2f * (rarity / 5000);
+    //                 break;
+    //             case "PersonalCritMult":
+    //                 weapon.PersonalCritMult += 2f * (rarity / 5000);
+    //                 break;
+    //             case "Bounce":
+    //                 weapon.Bounce += 0.5 * (rarity / 10000);
+    //                 break;
+    //         }
+    //     }
+    //     return true;
+    // }
     public void SetLevelUpBTn()
     {
         for (int i = 0; i < LevelUpBtn.Length; i++)
         {
             int rdm = Random.Range(0, WorldScript.itemRemains.Length);
+            // foreach (ItemData weapon in PlayerScript.weaponsList)
+            // {
+            //     if (WorldScript.item[rdm] == weapon)
+            //         Debug.Log("Tu l'as dejà, on va te proposer une ameilloration");
+            //     else 
+            //         tempoItem[i] = WorldScript.item[rdm];
+            // }
             tempoItem[i] = WorldScript.item[rdm];
             LevelUpBtn[i].GetComponentInChildren<TextMeshProUGUI>().text = WorldScript.item[rdm].itemName;
         }
@@ -107,6 +172,9 @@ public class UIManager : MonoBehaviour
     public void LevelUpBtnId(int id)
     {
         Debug.Log(id);
+        newSpell = tempoItem[id];
+        SpellScript.SetSpells(id);
+        PlayerScript.weaponsList.Add(tempoItem[id]);
         ClosePannel(1, false);
     }
 }
