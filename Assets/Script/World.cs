@@ -89,7 +89,8 @@ public class World : MonoBehaviour
             enemyList.Remove(enemy);
             if (Random.Range(0, 2) != 0)
             {
-                GameObject newOrb = Instantiate(XpOrb[0], enemy.transform.position, Quaternion.identity);
+                Vector3 spawnPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -1.4f);
+                GameObject newOrb = Instantiate(XpOrb[0], spawnPos, Quaternion.identity);
                 orbList.Add(newOrb);
             }
             Destroy(enemy);
@@ -128,5 +129,17 @@ public class World : MonoBehaviour
     void UnSpawnDist()
     {
 
+    }
+
+
+
+    //SPELL
+
+    public GameObject[] WeaponsPrefab;
+    public void SetAura()
+    {
+        GameObject nouvelObjet = Instantiate(WeaponsPrefab[0], player.transform);
+        nouvelObjet.transform.SetParent(player.transform);
+        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
     }
 }

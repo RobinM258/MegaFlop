@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Spells : MonoBehaviour
 {
+
     public GameObject WorldObj;
     public GameObject PlayerObj;
 
@@ -20,8 +21,9 @@ public class Spells : MonoBehaviour
     {
 
     }
+    
 
-    void ChangeSize(float nb)
+    public void ChangeSize(float nb)
     {
         transform.localScale = new Vector3(nb, nb, nb);
     }

@@ -1,9 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NouvelItem", menuName = "MegaFlop/Item")]
-public class ItemData : ScriptableObject
+public class UpgradeData : MonoBehaviour
 {
-    public int id;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created    public int id;
     public string itemName;
     public Sprite icon;
     public string description;
@@ -14,5 +13,5 @@ public class ItemData : ScriptableObject
     public float PersonalCrit;
     public float PersonnalCritMult;
     public float Size;
-    public float Bounce;
+    
 }
