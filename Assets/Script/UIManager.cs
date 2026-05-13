@@ -34,8 +34,6 @@ public class UIManager : MonoBehaviour
         PlayerScript = PlayerObj.GetComponent<Player>();
         SpellScript = WorldObj.GetComponent<Spells>();
         newSpell = GameData.FirstItem;
-        SpellScript.SetSpells(GameData.SelectedCharacterIndex);
-        PlayerScript.weaponsList.Add(newSpell);
     }
 
     // Update is called once per frame
@@ -98,7 +96,6 @@ public class UIManager : MonoBehaviour
             if (Pannels[i].activeSelf)
                 return true;
         }
-        Debug.Log("Pas de pannel");
         return false;
     }
 
