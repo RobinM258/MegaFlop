@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class Spells : MonoBehaviour
 {
+
     public GameObject WorldObj;
     public GameObject PlayerObj;
 
-    private World WorldScript;
-    private Player PlayerScript;
+    public GameObject[] SpellPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        WorldScript = WorldObj.GetComponent<World>();
-        PlayerScript = PlayerObj.GetComponent<Player>();
+        if (GameData.SelectedCharacterIndex == 0)
+            SetSpells(0);
     }
 
     // Update is called once per frame
@@ -21,8 +21,25 @@ public class Spells : MonoBehaviour
 
     }
 
-    void ChangeSize(float nb)
+    public void SetSpells(int id)
     {
-        transform.localScale = new Vector3(nb, nb, nb);
+        if (id == 0)
+            SetAura();
+        else if (id == 1)
+            SetFireBall();            
+
+    }
+    void SetAura()
+    {
+        GameObject nouvelObjet = Instantiate(SpellPrefab[0], PlayerObj.transform);
+        nouvelObjet.transform.SetParent(PlayerObj.transform);
+        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
+    }
+
+    void SetFireBall()
+    {
+        GameObject nouvelObjet = Instantiate(SpellPrefab[1], PlayerObj.transform);
+        nouvelObjet.transform.SetParent(PlayerObj.transform);
+        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
     }
 }

@@ -1,12 +1,14 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
 
     [Header("Player Stats")]
-    public ItemData[] item;
+    public List<ItemData> weaponsList = new List<ItemData>();
+    public List<UpgradeData> upgradeList = new List<UpgradeData>();
     public float Health;
     public float xp;
     public float Level;
