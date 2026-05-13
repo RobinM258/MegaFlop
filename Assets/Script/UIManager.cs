@@ -22,14 +22,20 @@ public class UIManager : MonoBehaviour
 
     private World WorldScript;
     private Player PlayerScript;
+    private Spells SpellScript;
 
 
     public ItemData[] tempoItem;
+    public ItemData newSpell;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         WorldScript = WorldObj.GetComponent<World>();
         PlayerScript = PlayerObj.GetComponent<Player>();
+        SpellScript = WorldObj.GetComponent<Spells>();
+        newSpell = GameData.FirstItem;
+        SpellScript.SetSpells(GameData.SelectedCharacterIndex);
+        PlayerScript.weaponsList.Add(newSpell);
     }
 
     // Update is called once per frame
@@ -67,6 +73,7 @@ public class UIManager : MonoBehaviour
             SwitchGame();
         Pannels[id].SetActive(true);
     }
+
     // Si all  est true ferme tout les pannel
     public void ClosePannel(int id, bool all)
     {
@@ -82,6 +89,7 @@ public class UIManager : MonoBehaviour
         if (Time.timeScale == 0f)
             SwitchGame();
     }
+
     // retourne  true si un pannel est ouvert
     public bool CheckPannel()
     {
@@ -164,7 +172,8 @@ public class UIManager : MonoBehaviour
     public void LevelUpBtnId(int id)
     {
         Debug.Log(id);
-        WorldScript.SetAura();
+        newSpell = tempoItem[id];
+        SpellScript.SetSpells(id);
         PlayerScript.weaponsList.Add(tempoItem[id]);
         ClosePannel(1, false);
     }

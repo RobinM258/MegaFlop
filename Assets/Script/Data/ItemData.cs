@@ -9,7 +9,9 @@ public class ItemData : ScriptableObject
     public string description;
     public int Level;
     public float Damage;
+    public float Speed;
     public float TotalDamage;
+    public float AttackSpeedBase;
     public float AttackSpeed;
     public float PersonalCrit;
     public float PersonnalCritMult;

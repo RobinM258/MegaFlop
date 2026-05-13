@@ -10,6 +10,8 @@ public class World : MonoBehaviour
     public GameObject[] XpOrb;
     public ItemData[] item;
     public ItemData[] itemRemains;
+    public GameObject DamageCounter;
+    public Transform monCanvas;
 
     public int Enemytest = 0;
     [Header("Dificulty Parameter")]
@@ -124,22 +126,12 @@ public class World : MonoBehaviour
         EnemyScript = newEnemy.GetComponent<BasicEnemy>();
         EnemyScript.PlayerObj = player;
         EnemyScript.WorldObj = this.gameObject;
+        EnemyScript.DamageCounter = DamageCounter;
+        EnemyScript.monCanvas = monCanvas;
     }
     
     void UnSpawnDist()
     {
 
-    }
-
-
-
-    //SPELL
-
-    public GameObject[] WeaponsPrefab;
-    public void SetAura()
-    {
-        GameObject nouvelObjet = Instantiate(WeaponsPrefab[0], player.transform);
-        nouvelObjet.transform.SetParent(player.transform);
-        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
     }
 }
