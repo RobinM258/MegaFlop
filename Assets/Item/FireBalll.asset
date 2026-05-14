@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: FireBalll
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: Aura
+  itemName: FireBall
   icon: {fileID: 0}
-  description: Elle augmente ton aura
+  description: Elle brule
   Level: 1
   Damage: 2
+  Speed: 10
   TotalDamage: 0
-  AttackSpeedBase: 0.7
+  AttackSpeedBase: 3
   AttackSpeed: 1
   PersonalCrit: 0
   PersonnalCritMult: 1
   Size: 4
-  Bounce: 0
+  Bounce: 2
+  ProjectileNumber: 1

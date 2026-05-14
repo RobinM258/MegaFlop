@@ -129,6 +129,29 @@ public class World : MonoBehaviour
         EnemyScript.DamageCounter = DamageCounter;
         EnemyScript.monCanvas = monCanvas;
     }
+
+    public GameObject FindClosestEnemy(GameObject gameObj, GameObject ignore)
+{
+    GameObject closest = null;
+    float shortestDistanceSqr = Mathf.Infinity;
+    Vector3 currentPos = gameObj.transform.position;
+
+    foreach (GameObject enemy in enemyList)
+    {
+        if (enemy == ignore || enemy == null) 
+            continue; 
+
+        Vector3 diff = enemy.transform.position - currentPos;
+        float curDistanceSqr = diff.sqrMagnitude;
+
+        if (curDistanceSqr < shortestDistanceSqr)
+        {
+            closest = enemy;
+            shortestDistanceSqr = curDistanceSqr;
+        }
+    }
+    return closest;
+}
     
     void UnSpawnDist()
     {

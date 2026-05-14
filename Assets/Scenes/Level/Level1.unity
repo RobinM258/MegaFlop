@@ -888,7 +888,7 @@ GameObject:
   - component: {fileID: 518339302}
   - component: {fileID: 518339304}
   - component: {fileID: 518339303}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1046,7 +1046,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 751696333
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
@@ -1952,7 +1952,7 @@ GameObject:
   - component: {fileID: 1620320051}
   - component: {fileID: 1620320053}
   - component: {fileID: 1620320054}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1978,6 +1978,7 @@ MonoBehaviour:
   - {fileID: 4143153820223475960, guid: 7a5016c2dd78e684294b1f0e8e69d044, type: 3}
   item:
   - {fileID: 11400000, guid: e2ae6e97241d1da408aab0a5fda73af3, type: 2}
+  - {fileID: 11400000, guid: 0e7dfebfd7b544f4a80c391f3675f28f, type: 2}
   itemRemains: []
   DamageCounter: {fileID: 0}
   monCanvas: {fileID: 0}
@@ -2050,6 +2051,9 @@ MonoBehaviour:
   PlayerObj: {fileID: 518339295}
   SpellPrefab:
   - {fileID: 248475347181281661, guid: 7edeeababd40cc84a869becfbc00ed9c, type: 3}
+  - {fileID: 7927761143915131415, guid: 4ad3e24be00fe63418b1b3389cf4ef5a, type: 3}
+  AmmoPrefab:
+  - {fileID: 7978058527168782075, guid: 1d536a6ddcff8d34a921c2e47d0f9737, type: 3}
 --- !u!1 &1808028877
 GameObject:
   m_ObjectHideFlags: 0

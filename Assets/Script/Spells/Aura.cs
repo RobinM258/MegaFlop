@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireBall : MonoBehaviour
+public class Aura : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public ItemData item;
@@ -33,7 +33,7 @@ public class FireBall : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            if (timer > item.AttackSpeedBase * item.AttackSpeed)
+            if (timer > item.AttackSpeedBase / item.AttackSpeed)
             {
                 BasicEnemy target = other.gameObject.GetComponent<BasicEnemy>();
                 target.GetDamage(item.Damage);

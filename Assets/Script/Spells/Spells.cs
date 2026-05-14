@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class Spells : MonoBehaviour
 {
 
@@ -7,12 +6,12 @@ public class Spells : MonoBehaviour
     public GameObject PlayerObj;
 
     public GameObject[] SpellPrefab;
+    public GameObject[] AmmoPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (GameData.SelectedCharacterIndex == 0)
-            SetSpells(0);
+        SetSpells(GameData.SelectedCharacterIndex);
     }
 
     // Update is called once per frame
@@ -25,8 +24,8 @@ public class Spells : MonoBehaviour
     {
         if (id == 0)
             SetAura();
-        // else if (id == 1)
-        //     SetFireBall();            
+        else if (id == 1)
+            SetFireBall();            
 
     }
     void SetAura()
@@ -36,10 +35,10 @@ public class Spells : MonoBehaviour
         nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
     }
 
-    // void SetFireBall()
-    // {
-    //     GameObject nouvelObjet = Instantiate(SpellPrefab[1], PlayerObj.transform);
-    //     nouvelObjet.transform.SetParent(PlayerObj.transform);
-    //     nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
-    // }
+    void SetFireBall()
+    {
+        GameObject nouvelObjet = Instantiate(SpellPrefab[1], PlayerObj.transform);
+        nouvelObjet.transform.SetParent(PlayerObj.transform);
+        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
+    }
 }

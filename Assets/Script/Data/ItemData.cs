@@ -17,4 +17,5 @@ public class ItemData : ScriptableObject
     public float PersonnalCritMult;
     public float Size;
     public float Bounce;
+    public float ProjectileNumber;
 }
