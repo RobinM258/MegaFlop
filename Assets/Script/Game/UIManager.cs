@@ -171,7 +171,7 @@ public class UIManager : MonoBehaviour
         Debug.Log(id);
         newSpell = tempoItem[id];
         SpellScript.SetSpells(id);
-        PlayerScript.weaponsList.Add(tempoItem[id]);
+        PlayerScript.PassifWeaponsList.Add(tempoItem[id]);
         ClosePannel(1, false);
     }
 }

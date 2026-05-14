@@ -71,7 +71,7 @@ public class World : MonoBehaviour
         for (int i = 0; i < orbList.Count; i++)
         {
             Vector3 direction = player.transform.position - orbList[i].transform.position;
-            if (direction.magnitude <= playerScript.CollectDistance && direction.magnitude > 1)
+            if (direction.magnitude <= playerScript.playerData.CollectDistance && direction.magnitude > 1)
                 orbList[i].transform.position += direction.normalized * 10 * Time.deltaTime;
             else if (direction.magnitude <= 1)
             {
@@ -131,27 +131,27 @@ public class World : MonoBehaviour
     }
 
     public GameObject FindClosestEnemy(GameObject gameObj, GameObject ignore)
-{
-    GameObject closest = null;
-    float shortestDistanceSqr = Mathf.Infinity;
-    Vector3 currentPos = gameObj.transform.position;
-
-    foreach (GameObject enemy in enemyList)
     {
-        if (enemy == ignore || enemy == null) 
-            continue; 
+        GameObject closest = null;
+        float shortestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPos = gameObj.transform.position;
 
-        Vector3 diff = enemy.transform.position - currentPos;
-        float curDistanceSqr = diff.sqrMagnitude;
-
-        if (curDistanceSqr < shortestDistanceSqr)
+        foreach (GameObject enemy in enemyList)
         {
-            closest = enemy;
-            shortestDistanceSqr = curDistanceSqr;
+            if (enemy == ignore || enemy == null) 
+                continue; 
+
+            Vector3 diff = enemy.transform.position - currentPos;
+            float curDistanceSqr = diff.sqrMagnitude;
+
+            if (curDistanceSqr < shortestDistanceSqr)
+            {
+                closest = enemy;
+                shortestDistanceSqr = curDistanceSqr;
+            }
         }
+        return closest;
     }
-    return closest;
-}
     
     void UnSpawnDist()
     {

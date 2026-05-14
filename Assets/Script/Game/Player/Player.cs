@@ -7,27 +7,15 @@ public class Player : MonoBehaviour
 {
 
     [Header("Player Stats")]
-    public List<ItemData> weaponsList = new List<ItemData>();
-    public List<UpgradeData> upgradeList = new List<UpgradeData>();
-    public float Health;
-    public float xp;
-    public float Level;
-    public float MoveSpeed;
-    public float CritPercent;
-    public float CritMultiplier;
-    public float AttaqueSpeed;
-    public float Armor;
-    public float Chance;
-    public float VulnerabilityTime;
-    public float Thorns;
-    public float CollectDistance;
-    public float PlayerX;
-    public float PlayerY;
+    public List<ItemData> PassifWeaponsList = new List<ItemData>();
+    public List<UpgradeData> UpgradeList = new List<UpgradeData>();
+    public bool Invulnerability;
+    private float timer;
 
     [Header("Global Parameter")]
     public TMP_Text HealCount;
     public GameObject WorldObj;
-
+    public PlayerData playerData;
 
     private Vector2 direction;
     private World WorldScript;
@@ -44,7 +32,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HealCount.text = Health.ToString();
+        HealCount.text = playerData.Health.ToString();
         WorldScript = WorldObj.GetComponent<World>();
         animator = GetComponent<Animator>();
     }
@@ -52,9 +40,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealCount.text = Health.ToString();
+        HealCount.text = playerData.Health.ToString();
+        if (Invulnerability)
+        {
+            timer += Time.deltaTime;
+            if (timer >= playerData.InvulnerabilityTime)
+            {
+                Invulnerability = false;
+                timer = 0;
+            }
+        }
     
-        Vector2 targetVelocity = direction.normalized * MoveSpeed;
+        Vector2 targetVelocity = direction.normalized * playerData.MoveSpeed;
         float smoothTime = direction.sqrMagnitude > 0.001f ? AccelerationTime : DecelerationTime;
     
         currentVelocity = Vector2.SmoothDamp(
@@ -63,11 +60,8 @@ public class Player : MonoBehaviour
             ref velocitySmoothing,
             smoothTime
         );
-    
+
         transform.position += (Vector3)(currentVelocity * Time.deltaTime);
-    
-        PlayerX = transform.position.x;
-        PlayerY = transform.position.y;
     }
 
     public void OnMove(InputValue value)
@@ -104,47 +98,50 @@ public class Player : MonoBehaviour
 
     public void GetDamage(float damage)
     {
-        if (Health <= 1)
+        if (playerData.Health <= 1)
             WorldScript.EndGame();
         else 
         {
-            if (damage <= Armor)
-                Health--;
-            else if (damage - Armor >= Health)
+            if (damage <= playerData.Armor)
+                playerData.Health--;
+            else if (damage - playerData.Armor >= playerData.Health)
                 WorldScript.EndGame();
             else
-                Health = Health - (damage - Armor);
+                playerData.Health = playerData.Health - (damage - playerData.Armor);
         }
 
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollision2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && Invulnerability == false)
         {
             BasicEnemy EnemyScript = collision.gameObject.GetComponent<BasicEnemy>();
             GetDamage(EnemyScript.Damage);
-            if (Thorns > 0)
-                EnemyScript.GetDamage(Thorns);
+            if (playerData.Thorns > 0)
+                EnemyScript.GetDamage(playerData.Thorns);
+            Invulnerability = true;
         }
     }
 
     public void AddXp(float nb)
     {
-        xp += nb;
-        while (xp >= GetXPRequired(Level))
+        playerData.Xp += nb;
+        while (playerData.Xp >= GetXPRequired(playerData.Level))
         {
             LevelUp();
         }
     }
+
     public void LevelUp()
     {
         UIManager ui = WorldObj.GetComponent<UIManager>();
-        xp -= GetXPRequired(Level);
+        playerData.Xp -= GetXPRequired(playerData.Level);
         ui.SetLevelUpBTn();
         ui.OpenPannel(1, true);
-        Level++;
+        playerData.Level++;
     }
+
     public float GetXPRequired(float level)
     {
         return Mathf.Round(WorldScript.baseXP * Mathf.Pow(level, WorldScript.exponent));

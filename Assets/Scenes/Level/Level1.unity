@@ -907,24 +907,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b941d7aafa022e40a80872f76a05bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  weaponsList: []
-  upgradeList: []
-  Health: 100
-  xp: 0
-  Level: 0
-  MoveSpeed: 10
-  CritPercent: 0
-  CritMultiplier: 1
-  AttaqueSpeed: 0
-  Armor: 0
-  Chance: 0
-  VulnerabilityTime: 0
-  Thorns: 5
-  CollectDistance: 2
-  PlayerX: 0
-  PlayerY: 0
+  PassifWeaponsList: []
+  UpgradeList: []
   HealCount: {fileID: 986301277}
   WorldObj: {fileID: 1620320050}
+  playerData: {fileID: 11400000, guid: 46ddd3d1e408b564f9820f928be49e42, type: 2}
   AccelerationTime: 0.02
   DecelerationTime: 0.02
 --- !u!61 &518339297

@@ -22,23 +22,8 @@ public class Spells : MonoBehaviour
 
     public void SetSpells(int id)
     {
-        if (id == 0)
-            SetAura();
-        else if (id == 1)
-            SetFireBall();            
-
-    }
-    void SetAura()
-    {
-        GameObject nouvelObjet = Instantiate(SpellPrefab[0], PlayerObj.transform);
+        GameObject nouvelObjet = Instantiate(SpellPrefab[id], PlayerObj.transform);
         nouvelObjet.transform.SetParent(PlayerObj.transform);
-        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
-    }
-
-    void SetFireBall()
-    {
-        GameObject nouvelObjet = Instantiate(SpellPrefab[1], PlayerObj.transform);
-        nouvelObjet.transform.SetParent(PlayerObj.transform);
-        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
+        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);       
     }
 }
