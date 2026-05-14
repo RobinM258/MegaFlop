@@ -16,7 +16,7 @@ MonoBehaviour:
   Xp: 0
   Gold: 0
   Level: 1
-  MoveSpeed: 1
+  MoveSpeed: 6
   CritPercent: 0
   CritMultiplier: 1
   AttaqueSpeed: 1
