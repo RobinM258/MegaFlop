@@ -42,6 +42,7 @@ public class FireBallProjectiles : MonoBehaviour
         {
             lastTarget = other.gameObject;
             Debug.Log("Arbre");
+            Destroy(other.gameObject);
             BounceLeft--;
             CheckBounce();
         }

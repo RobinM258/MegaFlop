@@ -8,17 +8,21 @@ public class Player : MonoBehaviour
 
     [Header("Player Stats")]
     public List<ItemData> PassifWeaponsList = new List<ItemData>();
+    public List<ItemData> ActifWeaponsList = new List<ItemData>();
     public List<UpgradeData> UpgradeList = new List<UpgradeData>();
+
+    public List<ItemData> Item = new List<ItemData>();
+
     public bool Invulnerability;
     private float timer;
 
     [Header("Global Parameter")]
-    public TMP_Text HealCount;
     public GameObject WorldObj;
     public PlayerData playerData;
 
     private Vector2 direction;
     private World WorldScript;
+    private UIManager UiScript;
 
     private Animator animator;
 
@@ -32,15 +36,14 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HealCount.text = playerData.Health.ToString();
         WorldScript = WorldObj.GetComponent<World>();
+        UiScript = WorldObj.GetComponent<UIManager>();
         animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        HealCount.text = playerData.Health.ToString();
         if (Invulnerability)
         {
             timer += Time.deltaTime;
@@ -127,6 +130,7 @@ public class Player : MonoBehaviour
     public void AddXp(float nb)
     {
         playerData.Xp += nb;
+        UiScript.SetDisplayXpLeft();
         while (playerData.Xp >= GetXPRequired(playerData.Level))
         {
             LevelUp();
@@ -137,6 +141,7 @@ public class Player : MonoBehaviour
     {
         UIManager ui = WorldObj.GetComponent<UIManager>();
         playerData.Xp -= GetXPRequired(playerData.Level);
+        UiScript.SetDisplayXpLeft();
         ui.SetLevelUpBTn();
         ui.OpenPannel(1, true);
         playerData.Level++;

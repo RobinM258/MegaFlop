@@ -11,7 +11,7 @@ public class Spells : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetSpells(GameData.SelectedCharacterIndex);
+        SetPassifWeapon(GameData.SelectedCharacterIndex);
     }
 
     // Update is called once per frame
@@ -20,10 +20,14 @@ public class Spells : MonoBehaviour
 
     }
 
-    public void SetSpells(int id)
+    public void SetPassifWeapon(int id)
     {
         GameObject nouvelObjet = Instantiate(SpellPrefab[id], PlayerObj.transform);
         nouvelObjet.transform.SetParent(PlayerObj.transform);
         nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);       
+    }
+    public void SetActifWeapon(int id)
+    {
+        
     }
 }

@@ -17,7 +17,8 @@ MonoBehaviour:
   icon: {fileID: 0}
   description: Elle augmente ton aura
   Level: 1
-  Damage: 2
+  Damage: 4
+  Speed: 0
   TotalDamage: 0
   AttackSpeedBase: 0.7
   AttackSpeed: 1
@@ -25,3 +26,4 @@ MonoBehaviour:
   PersonnalCritMult: 1
   Size: 4
   Bounce: 0
+  ProjectileNumber: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Level UP parameter")]
     public GameObject[] LevelUpBtn;
-
+    public GameObject[] StatsBtn;
     public GameObject WorldObj;
     public GameObject PlayerObj;
 
@@ -28,6 +29,10 @@ public class UIManager : MonoBehaviour
     public ItemData[] tempoItem;
     public ItemData newSpell;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        Time.timeScale = 1f;
+    }
     void Start()
     {
         WorldScript = WorldObj.GetComponent<World>();
@@ -99,6 +104,16 @@ public class UIManager : MonoBehaviour
         return false;
     }
 
+    public void SetDisplayXpLeft()
+    {
+        TMP_Text XPCount = StatsBtn[0].GetComponentInChildren<TMP_Text>();
+        if (!PlayerScript)
+            Debug.Log("test");
+        
+        string strToDisplay = "XP : " + PlayerScript.playerData.Xp + " / " + PlayerScript.GetXPRequired(PlayerScript.playerData.Level);
+        XPCount.text = strToDisplay;
+    }
+
     // public bool SetUpgrade()
     // {
     //     List<string> statWeapon = new List<string> { "Damage", "AttackSpeed", "Size", "PersonalCrit", "PersonalCritMult", "Bounce" };
@@ -153,7 +168,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < LevelUpBtn.Length; i++)
         {
-            int rdm = Random.Range(0, WorldScript.itemRemains.Length);
+            int rdm = Random.Range(0, WorldScript.item.Length);
             // foreach (ItemData weapon in PlayerScript.weaponsList)
             // {
             //     if (WorldScript.item[rdm] == weapon)
@@ -168,10 +183,14 @@ public class UIManager : MonoBehaviour
 
     public void LevelUpBtnId(int id)
     {
-        Debug.Log(id);
         newSpell = tempoItem[id];
-        SpellScript.SetSpells(id);
+        SpellScript.SetPassifWeapon(id);
         PlayerScript.PassifWeaponsList.Add(tempoItem[id]);
         ClosePannel(1, false);
+    }
+
+    public void BackMenu()
+    {
+        SceneManager.LoadScene("MenuSelection");
     }
 }
