@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa520ba7f1da24489171de7910fa0bb, type: 3}
+  m_Name: PlayerWithFireball
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData
+  Health: 10
+  Xp: 0
+  Gold: 0
+  Level: 1
+  MoveSpeed: 6
+  CritPercent: 0
+  CritMultiplier: 1
+  AttaqueSpeed: 1
+  Armor: 0
+  Chance: 0
+  InvulnerabilityTime: 0.5
+  Thorns: 0
+  CollectDistance: 1
+  PassifWeaponsList:
+  - {fileID: 11400000, guid: 0e7dfebfd7b544f4a80c391f3675f28f, type: 2}
+  ActifWeaponsList: []
+  UpgradeList: []
+  Item: []

@@ -6,17 +6,24 @@ public class MenuScript : MonoBehaviour
     public GameObject[] Pannels;
     public GameObject PreviousPannel;
     public GameObject CurrentPannel;
+    public PlayerData[] PlayerList;
 
     private bool LevelSelected;
     private bool PlayerSelected;
 
-
-    public ItemData[] Spell;
+    public ItemData[] PassifWeaponList;
+    public ItemData[] ActifWeaponList;
+    public ItemData[] ModuleList;
+    public ItemData[] Item;
     public ItemData CurrentItem;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameData.PassifWeaponList = PassifWeaponList;
+        GameData.ActifWeaponList = ActifWeaponList;
+        GameData.ModuleList = ModuleList;
+        GameData.Item = Item;
         CurrentPannel = Pannels[0];
     }
 
@@ -81,8 +88,8 @@ public class MenuScript : MonoBehaviour
 
     public void SelectPlayer(int id)
     {
-        GameData.SelectedCharacterIndex = id;
-        CurrentItem = Spell[id];
+        GameData.PlayerSelected = PlayerList[id];
+        CurrentItem = PassifWeaponList[id];
         PlayerSelected = true;
     }
 }

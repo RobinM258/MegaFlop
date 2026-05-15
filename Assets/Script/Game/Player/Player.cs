@@ -7,11 +7,10 @@ public class Player : MonoBehaviour
 {
 
     [Header("Player Stats")]
-    public List<ItemData> PassifWeaponsList = new List<ItemData>();
-    public List<ItemData> ActifWeaponsList = new List<ItemData>();
-    public List<UpgradeData> UpgradeList = new List<UpgradeData>();
-
-    public List<ItemData> Item = new List<ItemData>();
+    // public List<ItemData> PassifWeaponsList = new List<ItemData>();
+    // public List<ItemData> ActifWeaponsList = new List<ItemData>();
+    // public List<UpgradeData> UpgradeList = new List<UpgradeData>();
+    // public List<ItemData> Item = new List<ItemData>();
 
     public bool Invulnerability;
     private float timer;
@@ -39,6 +38,7 @@ public class Player : MonoBehaviour
         WorldScript = WorldObj.GetComponent<World>();
         UiScript = WorldObj.GetComponent<UIManager>();
         animator = GetComponent<Animator>();
+        playerData = Instantiate(GameData.PlayerSelected);
     }
 
     // Update is called once per frame
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
                 timer = 0;
             }
         }
-    
+
         Vector2 targetVelocity = direction.normalized * playerData.MoveSpeed;
         float smoothTime = direction.sqrMagnitude > 0.001f ? AccelerationTime : DecelerationTime;
     

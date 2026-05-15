@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "NouveauPlayer", menuName = "MegaFlop/PlayerData")]
 public class PlayerData : ScriptableObject
@@ -18,4 +18,8 @@ public class PlayerData : ScriptableObject
     public float Thorns;
     public float CollectDistance;
 
+    public List<ItemData> PassifWeaponsList = new List<ItemData>();
+    public List<ItemData> ActifWeaponsList = new List<ItemData>();
+    public List<UpgradeData> UpgradeList = new List<UpgradeData>();
+    public List<ItemData> Item = new List<ItemData>();
 }

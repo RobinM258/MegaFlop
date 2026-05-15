@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa520ba7f1da24489171de7910fa0bb, type: 3}
-  m_Name: PlayerData
+  m_Name: PlayerWithElectriqueAura
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   Health: 10
   Xp: 0
@@ -22,6 +22,11 @@ MonoBehaviour:
   AttaqueSpeed: 1
   Armor: 0
   Chance: 0
-  InvulnerabilityTime: 0
+  InvulnerabilityTime: 0.5
   Thorns: 0
   CollectDistance: 1
+  PassifWeaponsList:
+  - {fileID: 11400000, guid: e2ae6e97241d1da408aab0a5fda73af3, type: 2}
+  ActifWeaponsList: []
+  UpgradeList: []
+  Item: []

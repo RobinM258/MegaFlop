@@ -5,13 +5,16 @@ public class Spells : MonoBehaviour
     public GameObject WorldObj;
     public GameObject PlayerObj;
 
-    public GameObject[] SpellPrefab;
+    private Player playerScript;
+    public GameObject[] PassifWeaponPrefab;
     public GameObject[] AmmoPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetPassifWeapon(GameData.SelectedCharacterIndex);
+        playerScript = PlayerObj.GetComponent<Player>();
+        if (playerScript.playerData.PassifWeaponsList.Count > 0)
+            SetPassifWeapon(playerScript.playerData.PassifWeaponsList[0].id);
     }
 
     // Update is called once per frame
@@ -22,7 +25,7 @@ public class Spells : MonoBehaviour
 
     public void SetPassifWeapon(int id)
     {
-        GameObject nouvelObjet = Instantiate(SpellPrefab[id], PlayerObj.transform);
+        GameObject nouvelObjet = Instantiate(PassifWeaponPrefab[id], PlayerObj.transform);
         nouvelObjet.transform.SetParent(PlayerObj.transform);
         nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);       
     }

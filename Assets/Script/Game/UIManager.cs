@@ -38,7 +38,8 @@ public class UIManager : MonoBehaviour
         WorldScript = WorldObj.GetComponent<World>();
         PlayerScript = PlayerObj.GetComponent<Player>();
         SpellScript = WorldObj.GetComponent<Spells>();
-        newSpell = GameData.FirstItem;
+        if (PlayerScript.playerData.PassifWeaponsList.Count > 0)
+            newSpell = PlayerScript.playerData.PassifWeaponsList[0];
     }
 
     // Update is called once per frame
@@ -185,7 +186,7 @@ public class UIManager : MonoBehaviour
     {
         newSpell = tempoItem[id];
         SpellScript.SetPassifWeapon(id);
-        PlayerScript.PassifWeaponsList.Add(tempoItem[id]);
+        PlayerScript.playerData.PassifWeaponsList.Add(tempoItem[id]);
         ClosePannel(1, false);
     }
 

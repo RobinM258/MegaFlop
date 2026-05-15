@@ -908,10 +908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b941d7aafa022e40a80872f76a05bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  PassifWeaponsList: []
-  ActifWeaponsList: []
-  UpgradeList: []
-  Item: []
   Invulnerability: 0
   WorldObj: {fileID: 1620320050}
   playerData: {fileID: 11400000, guid: 46ddd3d1e408b564f9820f928be49e42, type: 2}
@@ -2312,7 +2308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Spells
   WorldObj: {fileID: 1620320050}
   PlayerObj: {fileID: 518339295}
-  SpellPrefab:
+  PassifWeaponPrefab:
   - {fileID: 248475347181281661, guid: 7edeeababd40cc84a869becfbc00ed9c, type: 3}
   - {fileID: 7927761143915131415, guid: 4ad3e24be00fe63418b1b3389cf4ef5a, type: 3}
   AmmoPrefab:

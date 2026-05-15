@@ -508,9 +508,14 @@ MonoBehaviour:
   - {fileID: 1269266108}
   PreviousPannel: {fileID: 0}
   CurrentPannel: {fileID: 0}
-  Spell:
+  PlayerList:
+  - {fileID: 11400000, guid: 46ddd3d1e408b564f9820f928be49e42, type: 2}
+  PassifWeaponList:
   - {fileID: 11400000, guid: e2ae6e97241d1da408aab0a5fda73af3, type: 2}
   - {fileID: 11400000, guid: 0e7dfebfd7b544f4a80c391f3675f28f, type: 2}
+  ActifWeaponList: []
+  ModuleList: []
+  Item: []
   CurrentItem: {fileID: 0}
 --- !u!4 &89736107
 Transform:
