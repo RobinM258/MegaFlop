@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     // public List<ItemData> ActifWeaponsList = new List<ItemData>();
     // public List<UpgradeData> UpgradeList = new List<UpgradeData>();
     // public List<ItemData> Item = new List<ItemData>();
+    public ItemData tempo;
 
     public bool Invulnerability;
     private float timer;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     private Vector2 direction;
     private World WorldScript;
     private UIManager UiScript;
+    private Spells SpellScript;
 
     private Animator animator;
 
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour
         UiScript = WorldObj.GetComponent<UIManager>();
         animator = GetComponent<Animator>();
         playerData = Instantiate(GameData.PlayerSelected);
+        SpellScript = WorldObj.GetComponent<Spells>();
     }
 
     // Update is called once per frame
@@ -97,6 +100,8 @@ public class Player : MonoBehaviour
     public void OnTab(InputValue value)
     {
         WorldScript.Spawner();
+        playerData.ActifWeaponsList.Add(tempo);
+        SpellScript.SetActifWeapon();
     }
 
     public void GetDamage(float damage)
