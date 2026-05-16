@@ -100,8 +100,11 @@ public class Player : MonoBehaviour
     public void OnTab(InputValue value)
     {
         WorldScript.Spawner();
-        playerData.ActifWeaponsList.Add(tempo);
-        SpellScript.SetActifWeapon();
+        if (playerData.ActifWeaponsList.Count <= 3)
+        {
+            playerData.ActifWeaponsList.Add(tempo);
+            SpellScript.SetActifWeapon();
+        }
     }
 
     public void GetDamage(float damage)

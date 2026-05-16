@@ -908,6 +908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b941d7aafa022e40a80872f76a05bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  tempo: {fileID: 11400000, guid: b5a711facd383224bb5f1de8a283c546, type: 2}
   Invulnerability: 0
   WorldObj: {fileID: 1620320050}
   playerData: {fileID: 11400000, guid: 46ddd3d1e408b564f9820f928be49e42, type: 2}
@@ -2281,6 +2282,7 @@ MonoBehaviour:
   - {fileID: 141657478}
   - {fileID: 1076561508}
   FPSCount: {fileID: 159404178}
+  CurrentSlotId: 0
   isPaused: 0
   LevelUpBtn:
   - {fileID: 328479695}
@@ -2288,6 +2290,11 @@ MonoBehaviour:
   - {fileID: 342420017}
   StatsBtn:
   - {fileID: 1388115767}
+  HotBarSlot:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   WorldObj: {fileID: 1620320050}
   PlayerObj: {fileID: 518339295}
   tempoItem:
