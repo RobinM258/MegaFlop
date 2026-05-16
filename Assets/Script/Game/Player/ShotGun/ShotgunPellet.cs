@@ -22,5 +22,14 @@ public class ShotgunPellet : MonoBehaviour
 
             Destroy(gameObject);
         }
+        if (collision.CompareTag("Tree"))
+        {
+            Vector3 hitPosition = collision.transform.position;
+        
+            ParticleManager.Instance.PlayEffect(ParticleEffectType.TreeDestroy, hitPosition);
+        
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

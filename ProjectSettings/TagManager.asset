@@ -49,14 +49,20 @@ TagManager:
   - name: Carpet
     uniqueID: 977290209
     locked: 0
-  - name: Spell
-    uniqueID: 81494371
-    locked: 0
   - name: Objects
     uniqueID: 3985846385
     locked: 0
+  - name: Spell
+    uniqueID: 81494371
+    locked: 0
+  - name: Enemy
+    uniqueID: 3522943999
+    locked: 0
   - name: Player
     uniqueID: 751696333
+    locked: 0
+  - name: Orbital
+    uniqueID: 3447787515
     locked: 0
   m_RenderingLayers:
   - Default

@@ -33,6 +33,8 @@ public class World : MonoBehaviour
     [Header("Réglage XP")]
     public float baseXP = 5f;
     public float exponent = 1.5f;
+
+    private ParticleHandler particleHandler;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -89,6 +91,9 @@ public class World : MonoBehaviour
         if (enemyList.Contains(enemy))
         {
             enemyList.Remove(enemy);
+            Vector3 hitPosition = enemy.transform.position;
+            Vector3 hitDirection = player.transform.position - enemy.transform.position;
+            ParticleManager.Instance.PlayEffect(ParticleEffectType.EnemyDeath, hitPosition, hitDirection);
             if (Random.Range(0, 2) != 0)
             {
                 Vector3 spawnPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -1.4f);
@@ -152,6 +157,39 @@ public class World : MonoBehaviour
         }
         return closest;
     }
+    public GameObject FindClosestEnemyList(GameObject gameObj, List<GameObject> BlackList)
+    {
+        GameObject closest = null;
+        float shortestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPos = gameObj.transform.position;
+        foreach (GameObject enemy in enemyList)
+        {
+            if (enemy == null)
+                continue;
+            bool shouldIgnored = false;
+            foreach(GameObject ignore in BlackList)
+            {
+                if (enemy == ignore)
+                {
+                    shouldIgnored = true;
+                    break;
+                }
+            }
+            if (shouldIgnored)
+                continue;
+
+            Vector3 diff = enemy.transform.position - currentPos;
+            float curDistanceSqr = diff.sqrMagnitude;
+
+            if (curDistanceSqr < shortestDistanceSqr)
+            {
+                closest = enemy;
+                shortestDistanceSqr = curDistanceSqr;
+            }
+        }
+        return closest;
+    }
+    
     
     void UnSpawnDist()
     {

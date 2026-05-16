@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8777475720173413463}
   - component: {fileID: 3132410096027318778}
   - component: {fileID: 6027019536624968272}
+  - component: {fileID: 5980933896005428562}
   m_Layer: 0
   m_Name: ShotGunPellet
   m_TagString: Untagged
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 751696333
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 0c7d76e6b4af79546b4ed6d6b36d26d1, type: 3}
@@ -171,3 +172,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5980933896005428562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5503166901897408508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b46b457e168a854ab90863f2ceb6c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleHandler
+  destroyTree: {fileID: 7245936309357443156, guid: 95cbac3079d1cdf48ba94440aad77c0b, type: 3}
+  enemyDying: {fileID: 7415700956436743843, guid: 3f5a6225bead2ac489ee77566f67147f, type: 3}
