@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "NouvelEnenemi", menuName = "MegaFlop/EnemyData")]
-public class Enemyata : ScriptableObject
+public class EnemyData : ScriptableObject
 {
     public float Health;
     public float Damage;

@@ -190,7 +190,6 @@ public class World : MonoBehaviour
         return closest;
     }
     
-    
     void UnSpawnDist()
     {
 

@@ -27,10 +27,7 @@ public class ShotgunWeapon : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            TryShoot();
-        }
+
     }
 
     public void TryShoot()

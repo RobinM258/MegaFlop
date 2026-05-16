@@ -8,6 +8,7 @@ public class Spells : MonoBehaviour
     public GameObject PlayerObj;
 
     private Player playerScript;
+    private WeaponManager weaponManagerScript;
     private UIManager UiScript;
     public GameObject[] PassifWeaponPrefab;
     public GameObject[] AmmoPrefab;
@@ -16,6 +17,8 @@ public class Spells : MonoBehaviour
     void Start()
     {
         playerScript = PlayerObj.GetComponent<Player>();
+        Transform Enfant = PlayerObj.transform.Find("ActifWeaponManager");
+        weaponManagerScript = Enfant.GetComponent<WeaponManager>();
         if (playerScript.playerData.PassifWeaponsList.Count > 0)
             SetPassifWeapon(playerScript.playerData.PassifWeaponsList[0].id);
         UiScript = WorldObj.GetComponent<UIManager>();
@@ -37,10 +40,5 @@ public class Spells : MonoBehaviour
     {
         Image imageDuSlot = UiScript.HotBarSlot[playerScript.playerData.ActifWeaponsList.Count - 1].GetComponent<Image>();
         imageDuSlot.sprite = playerScript.playerData.ActifWeaponsList[playerScript.playerData.ActifWeaponsList.Count - 1].icon;
-    }
-
-    public void UseWeapon(ItemData weapon)
-    {
-        Debug.Log("Faut tirer avec la weapon id" + weapon.id);
     }
 }

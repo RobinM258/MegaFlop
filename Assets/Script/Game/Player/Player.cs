@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     public bool Invulnerability;
     private float timer;
+    private WeaponManager weaponManagerScript;
 
     [Header("Global Parameter")]
     public GameObject WorldObj;
@@ -42,6 +43,8 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         playerData = Instantiate(GameData.PlayerSelected);
         SpellScript = WorldObj.GetComponent<Spells>();
+        Transform Enfant = transform.Find("ActifWeaponManager");
+        weaponManagerScript = Enfant.GetComponent<WeaponManager>();
     }
 
     // Update is called once per frame
@@ -90,11 +93,10 @@ public class Player : MonoBehaviour
 
         if (value.isPressed)
         {
-            Debug.Log("Clic gauche détecté !");
             // Time.timeScale
             if (playerData.ActifWeaponsList.Count > 0)
             {
-                SpellScript.UseWeapon(playerData.ActifWeaponsList[ui.CurrentSlotId]);
+                weaponManagerScript.UseWeapon(playerData.ActifWeaponsList[ui.CurrentSlotId]);
             }
         }
     }
