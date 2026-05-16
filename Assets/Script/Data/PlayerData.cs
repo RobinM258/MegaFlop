@@ -20,7 +20,7 @@ public class PlayerData : ScriptableObject
     public float CollectDistance;
 
     public List<ItemData> PassifWeaponsList = new List<ItemData>();
-    public List<ItemData> ActifWeaponsList = new List<ItemData>();
+    public List<ItemData> ActiveWeaponsList = new List<ItemData>();
     public List<UpgradeData> UpgradeList = new List<UpgradeData>();
     public List<ItemData> Item = new List<ItemData>();
 
@@ -43,7 +43,7 @@ public class PlayerData : ScriptableObject
         this.CollectDistance = other.CollectDistance;
 
         this.PassifWeaponsList = new List<ItemData>(other.PassifWeaponsList);
-        this.ActifWeaponsList = new List<ItemData>(other.ActifWeaponsList);
+        this.ActiveWeaponsList = new List<ItemData>(other.ActiveWeaponsList);
         this.UpgradeList = new List<UpgradeData>(other.UpgradeList);
         this.Item = new List<ItemData>(other.Item);
     }

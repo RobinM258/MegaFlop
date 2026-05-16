@@ -38,7 +38,7 @@ public class Spells : MonoBehaviour
     }
     public void SetActifWeapon(ItemData weapon)
     {
-        Image imageDuSlot = UiScript.HotBarSlot[playerScript.playerData.ActifWeaponsList.Count - 1].GetComponent<Image>();
-        imageDuSlot.sprite = playerScript.playerData.ActifWeaponsList[playerScript.playerData.ActifWeaponsList.Count - 1].icon;
+        Image imageDuSlot = UiScript.HotBarSlot[playerScript.playerData.ActiveWeaponsList.Count - 1].GetComponent<Image>();
+        imageDuSlot.sprite = playerScript.playerData.ActiveWeaponsList[playerScript.playerData.ActiveWeaponsList.Count - 1].icon;
     }
 }

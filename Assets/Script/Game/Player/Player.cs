@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     [Header("Player Stats")]
     public ItemData tempo;
+    public PlayerData DefaultPlayer;
     public bool Invulnerability;
     private float timer;
     public float EnemyKill;
@@ -32,6 +33,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        if (GameData.PlayerSelected == null)
+            GameData.PlayerSelected=  DefaultPlayer;
         PlayerData instanceData = ScriptableObject.CreateInstance<PlayerData>();
         instanceData.CopyFrom(GameData.PlayerSelected);
         playerData = instanceData;
@@ -91,9 +94,9 @@ public class Player : MonoBehaviour
         if (value.isPressed)
         {
             // Time.timeScale
-            if (playerData.ActifWeaponsList.Count > 0)
+            if (playerData.ActiveWeaponsList.Count > 0)
             {
-                weaponManagerScript.UseWeapon(playerData.ActifWeaponsList[ui.CurrentSlotId]);
+                weaponManagerScript.UseWeapon(playerData.ActiveWeaponsList[ui.CurrentSlotId]);
             }
         }
     }
@@ -114,10 +117,10 @@ public class Player : MonoBehaviour
     public void OnTab(InputValue value)
     {
         WorldScript.Spawner();
-        if (playerData.ActifWeaponsList.Count <= 3)
+        if (playerData.ActiveWeaponsList.Count <= 3)
         {
-            playerData.ActifWeaponsList.Add(tempo);
-            SpellScript.SetActifWeapon(playerData.ActifWeaponsList[playerData.ActifWeaponsList.Count - 1]);
+            playerData.ActiveWeaponsList.Add(tempo);
+            SpellScript.SetActifWeapon(playerData.ActiveWeaponsList[playerData.ActiveWeaponsList.Count - 1]);
         }
     }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 1
   itemName: 
-  icon: {fileID: 0}
+  icon: {fileID: 9082429109045791810, guid: ae10961a836e8664f8221600a738c26e, type: 3}
   description: 
   Level: 1
   Damage: 100

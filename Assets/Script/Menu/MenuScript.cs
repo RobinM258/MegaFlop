@@ -21,7 +21,7 @@ public class MenuScript : MonoBehaviour
     void Start()
     {
         GameData.PassifWeaponList = PassifWeaponList;
-        GameData.ActifWeaponList = ActifWeaponList;
+        GameData.ActiveWeaponsList = ActifWeaponList;
         GameData.ModuleList = ModuleList;
         GameData.Item = Item;
         CurrentPannel = Pannels[0];

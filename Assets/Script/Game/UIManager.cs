@@ -222,7 +222,7 @@ public class UIManager : MonoBehaviour
 
     public void HotBarManagerWheel(int number)
     {
-        int MaxSlot = PlayerScript.playerData.ActifWeaponsList.Count - 1;
+        int MaxSlot = PlayerScript.playerData.ActiveWeaponsList.Count - 1;
         int Index = CurrentSlotId + number;
         if (!isPaused)
         {
@@ -232,7 +232,7 @@ public class UIManager : MonoBehaviour
                 CurrentSlotId = 0;
             else
                 CurrentSlotId = Index;
-            if (PlayerScript.playerData.ActifWeaponsList.Count - 1 > 0)
+            if (PlayerScript.playerData.ActiveWeaponsList.Count - 1 > 0)
                 CurrentHotBarSlot.transform.position = HotBarSlot[CurrentSlotId].transform.position;
         }
     }

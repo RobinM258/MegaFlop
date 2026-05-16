@@ -7,7 +7,7 @@ public static class GameData
     public static PlayerData PlayerSelected;
 
     public static ItemData[] PassifWeaponList;
-    public static ItemData[] ActifWeaponList;
+    public static ItemData[] ActiveWeaponsList;
     public static ItemData[] ModuleList;
     public static ItemData[] Item;
     
