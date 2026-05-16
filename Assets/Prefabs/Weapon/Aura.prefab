@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 81494371
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3358879293708667487, guid: f355011e9aea2ed4597d5bb6d6d7cdb0, type: 3}
@@ -141,6 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6fb55c276f245438ea1281b1573f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireBall
-  item: {fileID: 0}
+  itemRef: {fileID: 11400000, guid: e2ae6e97241d1da408aab0a5fda73af3, type: 2}
   timer: 0
   WorldObj: {fileID: 0}

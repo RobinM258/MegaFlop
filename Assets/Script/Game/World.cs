@@ -10,7 +10,6 @@ public class World : MonoBehaviour
     public GameObject[] XpOrb;
     public ItemData[] item;
     public ItemData[] itemRemains;
-    public GameObject DamageCounter;
     public Transform monCanvas;
 
     public int Enemytest = 0;
@@ -67,7 +66,7 @@ public class World : MonoBehaviour
         for (int i = 0; i < enemyList.Count; i++)
         {
             Vector3 direction = player.transform.position - enemyList[i].transform.position;
-            enemyList[i].transform.position += direction.normalized * EnemyScript.MoveSpeed * Time.deltaTime;
+            enemyList[i].transform.position += direction.normalized * EnemyScript.enemyData.MovementSpeed * Time.deltaTime;
         }
 
         for (int i = 0; i < orbList.Count; i++)
@@ -131,8 +130,6 @@ public class World : MonoBehaviour
         EnemyScript = newEnemy.GetComponent<BasicEnemy>();
         EnemyScript.PlayerObj = player;
         EnemyScript.WorldObj = this.gameObject;
-        EnemyScript.DamageCounter = DamageCounter;
-        EnemyScript.monCanvas = monCanvas;
     }
 
     public GameObject FindClosestEnemy(GameObject gameObj, GameObject ignore)
@@ -189,6 +186,7 @@ public class World : MonoBehaviour
         }
         return closest;
     }
+
     
     void UnSpawnDist()
     {

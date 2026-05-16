@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     [Header("Global Parameter")]
     public GameObject WorldObj;
     public PlayerData playerData;
-
     private Vector2 direction;
     private World WorldScript;
     private UIManager UiScript;
@@ -38,10 +37,12 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PlayerData instanceData = ScriptableObject.CreateInstance<PlayerData>();
+        instanceData.CopyFrom(GameData.PlayerSelected);
+        playerData = instanceData;
         WorldScript = WorldObj.GetComponent<World>();
         UiScript = WorldObj.GetComponent<UIManager>();
         animator = GetComponent<Animator>();
-        playerData = Instantiate(GameData.PlayerSelected);
         SpellScript = WorldObj.GetComponent<Spells>();
         Transform Enfant = transform.Find("ActifWeaponManager");
         weaponManagerScript = Enfant.GetComponent<WeaponManager>();
@@ -137,7 +138,7 @@ public class Player : MonoBehaviour
             else
                 playerData.Health = playerData.Health - (damage - playerData.Armor);
         }
-
+        UiScript.DisplayPlayerHealth();
     }
 
     void OnCollision2D(Collision2D collision)
@@ -145,7 +146,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && Invulnerability == false)
         {
             BasicEnemy EnemyScript = collision.gameObject.GetComponent<BasicEnemy>();
-            GetDamage(EnemyScript.Damage);
+            GetDamage(EnemyScript.enemyData.Damage);
             if (playerData.Thorns > 0)
                 EnemyScript.GetDamage(playerData.Thorns);
             Invulnerability = true;

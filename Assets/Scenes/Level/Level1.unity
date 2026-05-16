@@ -1842,7 +1842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &986301276
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1859,7 +1859,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 100, y: 181.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &986301277
@@ -2740,7 +2740,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e2ae6e97241d1da408aab0a5fda73af3, type: 2}
   - {fileID: 11400000, guid: 0e7dfebfd7b544f4a80c391f3675f28f, type: 2}
   itemRemains: []
-  DamageCounter: {fileID: 0}
   monCanvas: {fileID: 0}
   Enemytest: 0
   Dificulty: 0
@@ -2791,6 +2790,7 @@ MonoBehaviour:
   - {fileID: 342420017}
   StatsBtn:
   - {fileID: 1388115767}
+  - {fileID: 986301275}
   HotBarSlot:
   - {fileID: 1375799407}
   - {fileID: 913127932}

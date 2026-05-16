@@ -18,4 +18,24 @@ public class ItemData : ScriptableObject
     public float Size;
     public float Bounce;
     public float ProjectileNumber;
+
+    public void CopyFrom(ItemData other)
+    {
+        this.id = other.id;
+        this.itemName = other.itemName;
+        this.icon = other.icon;
+        this.description = other.description;
+        this.Level = other.Level;
+        this.Damage = other.Damage;
+        this.Speed = other.Speed;
+        this.TotalDamage = other.TotalDamage;
+        this.AttackSpeedBase = other.AttackSpeedBase;
+        this.AttackSpeed = other.AttackSpeed;
+        this.PersonalCrit = other.PersonalCrit;
+        this.PersonnalCritMult = other.PersonnalCritMult;
+        this.Size = other.Size;
+        this.Bounce = other.Bounce;
+        this.ProjectileNumber = other.ProjectileNumber;
+    }
+    public ItemData() {}
 }

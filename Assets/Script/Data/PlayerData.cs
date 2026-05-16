@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PlayerData : ScriptableObject
 {
     public float Health;
+    public float MaxHealth;
     public float Xp;
     public float Gold;
     public float Level;
@@ -22,4 +23,29 @@ public class PlayerData : ScriptableObject
     public List<ItemData> ActifWeaponsList = new List<ItemData>();
     public List<UpgradeData> UpgradeList = new List<UpgradeData>();
     public List<ItemData> Item = new List<ItemData>();
+
+    public void CopyFrom(PlayerData other)
+    {
+        this.Health = other.Health;
+        this.MaxHealth = other.MaxHealth;
+        this.Xp = other.Xp;
+        this.Gold = other.Gold;
+        this.Level = other.Level;
+        this.MoveSpeed = other.MoveSpeed;
+        this.CritPercent = other.CritPercent;
+        this.CritMultiplier = other.CritMultiplier;
+        this.AttaqueSpeed = other.AttaqueSpeed;
+        this.Armor = other.Armor;
+        this.Armor = other.Armor;
+        this.Chance = other.Chance;
+        this.InvulnerabilityTime = other.InvulnerabilityTime;
+        this.Thorns = other.Thorns;
+        this.CollectDistance = other.CollectDistance;
+
+        this.PassifWeaponsList = new List<ItemData>(other.PassifWeaponsList);
+        this.ActifWeaponsList = new List<ItemData>(other.ActifWeaponsList);
+        this.UpgradeList = new List<UpgradeData>(other.UpgradeList);
+        this.Item = new List<ItemData>(other.Item);
+    }
+    public PlayerData() {}
 }

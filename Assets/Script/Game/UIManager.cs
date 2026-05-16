@@ -124,6 +124,13 @@ public class UIManager : MonoBehaviour
         XPCount.text = strToDisplay;
     }
 
+    public void DisplayPlayerHealth()
+    {
+        TMP_Text Heal = StatsBtn[1].GetComponentInChildren<TMP_Text>();
+        string strToDisplay = PlayerScript.playerData.Health.ToString("0") + "|" + PlayerScript.playerData.MaxHealth.ToString("0");
+        Heal.text = strToDisplay;
+    }
+
     // public bool SetUpgrade()
     // {
     //     List<string> statWeapon = new List<string> { "Damage", "AttackSpeed", "Size", "PersonalCrit", "PersonalCritMult", "Bounce" };
