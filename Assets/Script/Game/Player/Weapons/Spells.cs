@@ -17,7 +17,7 @@ public class Spells : MonoBehaviour
     void Start()
     {
         playerScript = PlayerObj.GetComponent<Player>();
-        Transform Enfant = PlayerObj.transform.Find("ActifWeaponManager");
+        Transform Enfant = PlayerObj.transform.Find("ActiveWeaponManager");
         weaponManagerScript = Enfant.GetComponent<WeaponManager>();
         if (playerScript.playerData.PassifWeaponsList.Count > 0)
             SetPassifWeapon(playerScript.playerData.PassifWeaponsList[0].id);

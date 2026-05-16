@@ -480,8 +480,9 @@ GameObject:
   - component: {fileID: 209472455}
   - component: {fileID: 209472457}
   - component: {fileID: 209472456}
+  - component: {fileID: 209472458}
   m_Layer: 0
-  m_Name: ActifWeaponManager
+  m_Name: ActiveWeaponManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -538,6 +539,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa75608f5ca0c943a1bec8d05f492ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponManager
+--- !u!114 &209472458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209472454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5e52d1d6313a04191773503a09161e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Laser
+  firePoint: {fileID: 518339300}
+  itemData: {fileID: 11400000, guid: 22d864fbecb415242bc1313956b45e80, type: 2}
+  mainCamera: {fileID: 519420031}
+  recoilMotor: {fileID: 0}
+  clipSize: 1
+  ammoInClip: 1
+  reloadTime: 1
+  laserLength: 30
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 520
 --- !u!1 &210919318
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,7 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b941d7aafa022e40a80872f76a05bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  tempo: {fileID: 11400000, guid: b5a711facd383224bb5f1de8a283c546, type: 2}
+  tempo: {fileID: 11400000, guid: 22d864fbecb415242bc1313956b45e80, type: 2}
   Invulnerability: 0
   WorldObj: {fileID: 1620320050}
   playerData: {fileID: 11400000, guid: 46ddd3d1e408b564f9820f928be49e42, type: 2}

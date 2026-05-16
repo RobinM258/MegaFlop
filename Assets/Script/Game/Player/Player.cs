@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         playerData = Instantiate(GameData.PlayerSelected);
         SpellScript = WorldObj.GetComponent<Spells>();
-        Transform Enfant = transform.Find("ActifWeaponManager");
+        Transform Enfant = transform.Find("ActiveWeaponManager");
         weaponManagerScript = Enfant.GetComponent<WeaponManager>();
     }
 
