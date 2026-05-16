@@ -24,6 +24,7 @@ public class World : MonoBehaviour
     private int MaxEnemy = 1000;
     private float RefreshTime = 5.0f;
     private float timer;
+    private float timerUpdate;
     private Player playerScript;
     public List<GameObject> enemyList = new List<GameObject>();
     public List<GameObject> orbList = new List<GameObject>();
@@ -53,12 +54,17 @@ public class World : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        timerUpdate += Time.deltaTime;
         if (timer > RefreshTime)
         {
             Spawner();
             timer = 0f;
         }
-        EnemyHandler();
+        if (timer >= GameData.updateInterval)
+        {
+            EnemyHandler();
+            timerUpdate = 0f;
+        }
     }
 
     void EnemyHandler()
@@ -99,7 +105,9 @@ public class World : MonoBehaviour
                 GameObject newOrb = Instantiate(XpOrb[0], spawnPos, Quaternion.identity);
                 orbList.Add(newOrb);
             }
-            Destroy(enemy);
+            playerScript.EnemyKill++;   
+            playerScript.UiScript.DisplayNumberKill(playerScript.EnemyKill);
+            Destroy(enemy);     
         }
     }
 

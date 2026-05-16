@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerWithOrbitalLaser
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   Health: 10
+  MaxHealth: 10
   Xp: 0
   Gold: 0
   Level: 1

@@ -10,4 +10,10 @@ public static class GameData
     public static ItemData[] ActifWeaponList;
     public static ItemData[] ModuleList;
     public static ItemData[] Item;
+    
+
+
+    // VARIABLE OBTIMISATION
+
+    public static float updateInterval = 0.05f;
 }
