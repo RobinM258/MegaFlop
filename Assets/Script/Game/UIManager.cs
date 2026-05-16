@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     public GameObject[] LevelUpBtn;
     public GameObject[] StatsBtn;
     public GameObject[] HotBarSlot;
+    public GameObject CurrentHotBarSlot;
     public GameObject WorldObj;
     public GameObject PlayerObj;
 
@@ -217,7 +218,8 @@ public class UIManager : MonoBehaviour
                 CurrentSlotId = 0;
             else
                 CurrentSlotId = Index;
-            //Debug.Log("Slot :" + CurrentSlotId);
+            if (PlayerScript.playerData.ActifWeaponsList.Count - 1 > 0)
+                CurrentHotBarSlot.transform.position = HotBarSlot[CurrentSlotId].transform.position;
         }
     }
     public void HotBarManagerKey(int number)

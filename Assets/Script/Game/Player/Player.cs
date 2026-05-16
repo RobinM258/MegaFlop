@@ -84,6 +84,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnLeftClick(InputValue value)
+    {
+        UIManager ui = WorldObj.GetComponent<UIManager>();
+
+        if (value.isPressed)
+        {
+            Debug.Log("Clic gauche détecté !");
+            // Time.timeScale
+            if (playerData.ActifWeaponsList.Count > 0)
+            {
+                SpellScript.UseWeapon(playerData.ActifWeaponsList[ui.CurrentSlotId]);
+            }
+        }
+    }
+
     public void OnCancel(InputValue value)
     {
         UIManager ui = WorldObj.GetComponent<UIManager>();
@@ -103,7 +118,7 @@ public class Player : MonoBehaviour
         if (playerData.ActifWeaponsList.Count <= 3)
         {
             playerData.ActifWeaponsList.Add(tempo);
-            SpellScript.SetActifWeapon();
+            SpellScript.SetActifWeapon(playerData.ActifWeaponsList[playerData.ActifWeaponsList.Count - 1]);
         }
     }
 

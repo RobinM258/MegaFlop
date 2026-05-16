@@ -33,11 +33,14 @@ public class Spells : MonoBehaviour
         nouvelObjet.transform.SetParent(PlayerObj.transform);
         nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);       
     }
-    public void SetActifWeapon()
+    public void SetActifWeapon(ItemData weapon)
     {
-        //Debug.Log("test" + playerScript.playerData.ActifWeaponsList.Count);
         Image imageDuSlot = UiScript.HotBarSlot[playerScript.playerData.ActifWeaponsList.Count - 1].GetComponent<Image>();
         imageDuSlot.sprite = playerScript.playerData.ActifWeaponsList[playerScript.playerData.ActifWeaponsList.Count - 1].icon;
-        // UiScript.HotBarSlot[playerScript.playerData.ActifWeaponsList.Count] = playerScript.playerData.ActifWeaponsList[playerScript.playerData.ActifWeaponsList.Count].icon;
+    }
+
+    public void UseWeapon(ItemData weapon)
+    {
+        Debug.Log("Faut tirer avec la weapon id" + weapon.id);
     }
 }

@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa520ba7f1da24489171de7910fa0bb, type: 3}
   m_Name: PlayerWithOrbitalLaser
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  Health: 0
+  Health: 10
   Xp: 0
   Gold: 0
-  Level: 0
+  Level: 1
   MoveSpeed: 10
   CritPercent: 0
   CritMultiplier: 0
   AttaqueSpeed: 0
   Armor: 0
   Chance: 0
-  InvulnerabilityTime: 0
+  InvulnerabilityTime: 1
   Thorns: 0
   CollectDistance: 0
   PassifWeaponsList:
