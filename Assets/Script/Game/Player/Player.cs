@@ -7,23 +7,18 @@ public class Player : MonoBehaviour
 {
 
     [Header("Player Stats")]
-    // public List<ItemData> PassifWeaponsList = new List<ItemData>();
-    // public List<ItemData> ActifWeaponsList = new List<ItemData>();
-    // public List<UpgradeData> UpgradeList = new List<UpgradeData>();
-    // public List<ItemData> Item = new List<ItemData>();
     public ItemData tempo;
-
     public bool Invulnerability;
     private float timer;
+    public float EnemyKill;
     private WeaponManager weaponManagerScript;
 
     [Header("Global Parameter")]
     public GameObject WorldObj;
     public PlayerData playerData;
-
     private Vector2 direction;
     private World WorldScript;
-    private UIManager UiScript;
+    public UIManager UiScript;
     private Spells SpellScript;
 
     private Animator animator;
@@ -35,16 +30,18 @@ public class Player : MonoBehaviour
     private Vector2 currentVelocity;
     private Vector2 velocitySmoothing;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PlayerData instanceData = ScriptableObject.CreateInstance<PlayerData>();
+        instanceData.CopyFrom(GameData.PlayerSelected);
+        playerData = instanceData;
         WorldScript = WorldObj.GetComponent<World>();
         UiScript = WorldObj.GetComponent<UIManager>();
         animator = GetComponent<Animator>();
-        playerData = Instantiate(GameData.PlayerSelected);
         SpellScript = WorldObj.GetComponent<Spells>();
         Transform Enfant = transform.Find("ActiveWeaponManager");
         weaponManagerScript = Enfant.GetComponent<WeaponManager>();
+        UiScript.DisplayPlayerHealth(playerData.Health, playerData.MaxHealth);
     }
 
     // Update is called once per frame
@@ -133,19 +130,23 @@ public class Player : MonoBehaviour
             if (damage <= playerData.Armor)
                 playerData.Health--;
             else if (damage - playerData.Armor >= playerData.Health)
+            {
+                playerData.Health = playerData.Health - (damage - playerData.Armor);
+                UiScript.DisplayPlayerHealth(playerData.Health, playerData.MaxHealth);
                 WorldScript.EndGame();
+            }
             else
                 playerData.Health = playerData.Health - (damage - playerData.Armor);
         }
-
+        UiScript.DisplayPlayerHealth(playerData.Health, playerData.MaxHealth);
     }
 
-    void OnCollision2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && Invulnerability == false)
         {
             BasicEnemy EnemyScript = collision.gameObject.GetComponent<BasicEnemy>();
-            GetDamage(EnemyScript.Damage);
+            GetDamage(EnemyScript.enemyData.Damage);
             if (playerData.Thorns > 0)
                 EnemyScript.GetDamage(playerData.Thorns);
             Invulnerability = true;

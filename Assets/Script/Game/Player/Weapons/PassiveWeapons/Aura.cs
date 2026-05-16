@@ -3,7 +3,8 @@ using UnityEngine;
 public class Aura : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public ItemData item;
+    private ItemData item;
+    public ItemData itemRef;
     public float timer;
     public GameObject WorldObj;
     private Spells spellScrypt;
@@ -11,6 +12,9 @@ public class Aura : MonoBehaviour
 
     void Start()
     {
+        ItemData instanceData = ScriptableObject.CreateInstance<ItemData>();
+        instanceData.CopyFrom(itemRef);
+        item = instanceData;
         WorldObj = GameObject.Find("World");
         Spells spellScrypt = WorldObj.GetComponent<Spells>();
         UIManager uiScript = WorldObj.GetComponent<UIManager>();

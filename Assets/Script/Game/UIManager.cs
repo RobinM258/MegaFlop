@@ -124,6 +124,20 @@ public class UIManager : MonoBehaviour
         XPCount.text = strToDisplay;
     }
 
+    public void DisplayPlayerHealth(float Health, float MaxHealth)
+    {
+        TMP_Text Heal = StatsBtn[1].GetComponentInChildren<TMP_Text>();
+        string strToDisplay = Health.ToString("0") + " / " + MaxHealth.ToString("0");
+        Heal.text = strToDisplay;
+    }
+
+    public void DisplayNumberKill(float number)
+    {
+        TMP_Text Kills = StatsBtn[2].GetComponentInChildren<TMP_Text>();
+        string strToDisplay = number.ToString("0");
+        Kills.text = strToDisplay;
+    }
+
     // public bool SetUpgrade()
     // {
     //     List<string> statWeapon = new List<string> { "Damage", "AttackSpeed", "Size", "PersonalCrit", "PersonalCritMult", "Bounce" };

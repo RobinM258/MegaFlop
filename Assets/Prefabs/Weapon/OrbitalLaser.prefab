@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrbitalLaser
   timer: 0
-  item: {fileID: 0}
+  itemRef: {fileID: 11400000, guid: 374da5e37e4d546499956da52cccdc81, type: 2}
   OrbitalLaserProjectil: {fileID: 0}
   WorldObj: {fileID: 0}
-  AmmoList: []
+  ammoList: []
+  enemyBlackList: []

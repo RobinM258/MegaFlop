@@ -5,6 +5,7 @@ public class FireBall : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public ItemData item;
+    public ItemData itemRef;
     public float timer;
     public GameObject WorldObj;
     public GameObject FireBallProjectilesObj;
@@ -16,6 +17,9 @@ public class FireBall : MonoBehaviour
 
     void Start()
     {
+        ItemData instanceData = ScriptableObject.CreateInstance<ItemData>();
+        instanceData.CopyFrom(itemRef);
+        item = instanceData;
         WorldObj = GameObject.Find("World");
         spellScrypt = WorldObj.GetComponent<Spells>();
         uiScript = WorldObj.GetComponent<UIManager>();

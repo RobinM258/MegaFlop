@@ -10,4 +10,15 @@ public class EnemyData : ScriptableObject
     public float MovementSpeed;
     public bool IsBoss;
     public bool IsQuest;
+
+    public void CopyFrom(EnemyData other)
+    {
+        this.Health = other.Health;
+        this.Damage = other.Damage;
+        this.Level = other.Level;
+        this.MovementSpeed = other.MovementSpeed;
+        this.IsBoss = other.IsBoss;
+        this.IsQuest = other.IsQuest;
+    }
+    public EnemyData() {}
 }

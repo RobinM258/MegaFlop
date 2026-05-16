@@ -106,13 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539a263cb3aad2b4a9d575fa4246758f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasicEnemy
-  Health: 10
-  MoveSpeed: 2
-  Damage: 1
+  enemyData: {fileID: 11400000, guid: 6641ebc0dc30b2f4496dd20eb3c753c2, type: 2}
   PlayerObj: {fileID: 0}
   WorldObj: {fileID: 0}
-  DamageCounter: {fileID: 0}
-  monCanvas: {fileID: 0}
 --- !u!61 &3164529977893340400
 BoxCollider2D:
   m_ObjectHideFlags: 0
