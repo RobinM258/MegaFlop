@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b80b814fa3709eb4083162ad4f1946a3, type: 3}
-  m_Name: ElectriqueAura
+  m_Name: Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: Aura
-  icon: {fileID: 3948316311559484057, guid: 1c7b1db29a2cd4845b6ffadd1646d4d9, type: 3}
-  description: Elle augmente ton aura
-  Level: 1
-  Damage: 10
+  itemName: 
+  icon: {fileID: -3613875425250253008, guid: 00b25c7c44804f74db008a91963dc716, type: 3}
+  description: 
+  Level: 0
+  Damage: 0
   Speed: 0
   TotalDamage: 0
-  AttackSpeedBase: 0.7
-  AttackSpeed: 1
+  AttackSpeedBase: 0
+  AttackSpeed: 0
   PersonalCrit: 0
-  PersonnalCritMult: 1
-  Size: 4
+  PersonnalCritMult: 0
+  Size: 0
   Bounce: 0
   ProjectileNumber: 0

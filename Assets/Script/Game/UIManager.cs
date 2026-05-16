@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [Header("Player Stats")]
     public GameObject[] Pannels;
     public TMP_Text FPSCount;
+    public int CurrentSlotId;
 
     [Header("World Stats")]
     public bool isPaused = false;
@@ -18,6 +20,7 @@ public class UIManager : MonoBehaviour
     [Header("Level UP parameter")]
     public GameObject[] LevelUpBtn;
     public GameObject[] StatsBtn;
+    public GameObject[] HotBarSlot;
     public GameObject WorldObj;
     public GameObject PlayerObj;
 
@@ -53,6 +56,13 @@ public class UIManager : MonoBehaviour
         {
             FPSCount.text = string.Format("{0:0.} FPS", fps);
             deltaTimeFPS = 0;
+        }
+
+        Vector2 scrollValue = Mouse.current.scroll.ReadValue();
+    
+        if (scrollValue.y != 0)
+        {
+            HotBarManagerWheel((int)scrollValue.y);
         }
     }
 
@@ -108,8 +118,6 @@ public class UIManager : MonoBehaviour
     public void SetDisplayXpLeft()
     {
         TMP_Text XPCount = StatsBtn[0].GetComponentInChildren<TMP_Text>();
-        if (!PlayerScript)
-            Debug.Log("test");
         
         string strToDisplay = "XP : " + PlayerScript.playerData.Xp + " / " + PlayerScript.GetXPRequired(PlayerScript.playerData.Level);
         XPCount.text = strToDisplay;
@@ -193,5 +201,28 @@ public class UIManager : MonoBehaviour
     public void BackMenu()
     {
         SceneManager.LoadScene("MenuSelection");
+    }
+
+    //HotBar
+
+    public void HotBarManagerWheel(int number)
+    {
+        int MaxSlot = PlayerScript.playerData.ActifWeaponsList.Count - 1;
+        int Index = CurrentSlotId + number;
+        if (!isPaused)
+        {
+            if (Index < 0)
+                CurrentSlotId = MaxSlot;
+            else if (Index > MaxSlot)
+                CurrentSlotId = 0;
+            else
+                CurrentSlotId = Index;
+            //Debug.Log("Slot :" + CurrentSlotId);
+        }
+    }
+    public void HotBarManagerKey(int number)
+    {
+        if (isPaused)
+            CurrentSlotId = number;
     }
 }

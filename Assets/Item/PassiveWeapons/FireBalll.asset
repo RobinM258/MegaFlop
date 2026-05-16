@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 1
   itemName: FireBall
-  icon: {fileID: 0}
+  icon: {fileID: 6445941603473202802, guid: 8c791e5a0a0f314448b53530e6e3ef14, type: 3}
   description: Elle brule
   Level: 1
   Damage: 2

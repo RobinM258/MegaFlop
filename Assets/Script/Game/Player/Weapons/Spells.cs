@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 public class Spells : MonoBehaviour
 {
 
@@ -6,6 +8,7 @@ public class Spells : MonoBehaviour
     public GameObject PlayerObj;
 
     private Player playerScript;
+    private UIManager UiScript;
     public GameObject[] PassifWeaponPrefab;
     public GameObject[] AmmoPrefab;
 
@@ -15,6 +18,7 @@ public class Spells : MonoBehaviour
         playerScript = PlayerObj.GetComponent<Player>();
         if (playerScript.playerData.PassifWeaponsList.Count > 0)
             SetPassifWeapon(playerScript.playerData.PassifWeaponsList[0].id);
+        UiScript = WorldObj.GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -29,8 +33,11 @@ public class Spells : MonoBehaviour
         nouvelObjet.transform.SetParent(PlayerObj.transform);
         nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);       
     }
-    public void SetActifWeapon(int id)
+    public void SetActifWeapon()
     {
-        
+        //Debug.Log("test" + playerScript.playerData.ActifWeaponsList.Count);
+        Image imageDuSlot = UiScript.HotBarSlot[playerScript.playerData.ActifWeaponsList.Count - 1].GetComponent<Image>();
+        imageDuSlot.sprite = playerScript.playerData.ActifWeaponsList[playerScript.playerData.ActifWeaponsList.Count - 1].icon;
+        // UiScript.HotBarSlot[playerScript.playerData.ActifWeaponsList.Count] = playerScript.playerData.ActifWeaponsList[playerScript.playerData.ActifWeaponsList.Count].icon;
     }
 }
