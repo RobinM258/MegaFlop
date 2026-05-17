@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 2
   itemName: Orbital Laser
-  icon: {fileID: 0}
+  icon: {fileID: -4801933062477416177, guid: 173a538626a8e9946a35d4f8d1bec566, type: 3}
   description: 
   Level: 1
   Damage: 5

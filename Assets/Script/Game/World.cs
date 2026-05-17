@@ -11,18 +11,14 @@ public class World : MonoBehaviour
     public ItemData[] item;
     public ItemData[] itemRemains;
     public Transform monCanvas;
-
     public int Enemytest = 0;
-    [Header("Dificulty Parameter")]
-    public float Dificulty;
-    public float DificultyMultiplier;
     public float DificultyAugmentation;
     [Header("Spawn Parameter")]
     public float MinRadius;
     public float MaxRadius;
     private int SpawnRate;
     private int MaxEnemy = 1000;
-    private float RefreshTime = 5.0f;
+    private float RefreshTime = 3f;
     private float timer;
     private float timerUpdate;
     private Player playerScript;
@@ -34,13 +30,24 @@ public class World : MonoBehaviour
     public float baseXP = 5f;
     public float exponent = 1.5f;
 
+    //PARTICULE
     private ParticleHandler particleHandler;
+
+    // TIMER
+    public float timeLeft;
+    public float DificultyIndex;
+
+    // TOWER
+    public GameObject[] TowerInLevel;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (GameData.LevelDuration <= 0)
+            GameData.LevelDuration = 600;
         ItemData[] itemRemains = item;
         playerScript = player.GetComponent<Player>();
-        SpawnRate = 3;
+        SpawnRate = 5;
         for (int i = 0; i < Enemytest; i++)
         {
             GameObject newEnemy = Instantiate(Enemy[0], new Vector3(4, 4, 0), Quaternion.identity);
@@ -49,18 +56,25 @@ public class World : MonoBehaviour
             EnemyScript.PlayerObj = player;
             EnemyScript.WorldObj = this.gameObject;
         } 
+        timeLeft = GameData.LevelDuration;
+        DificultyIndex = Enemy.Length;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
         timerUpdate += Time.deltaTime;
+        if (timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+            playerScript.UiScript.DisplayTimer(timeLeft);
+        }
         if (timer > RefreshTime)
         {
             Spawner();
             timer = 0f;
         }
-        if (timer >= GameData.updateInterval)
+        if (timerUpdate >= GameData.updateInterval)
         {
             EnemyHandler();
             timerUpdate = 0f;
@@ -113,17 +127,26 @@ public class World : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("tu es mort");
+        //Debug.Log("tu es mort");
     }
 
     public void Spawner()
     {
-        float RealDificulty = Dificulty * DificultyMultiplier;
+        float tmp = GameData.LevelDuration / DificultyIndex;
+        float index = DificultyIndex - 1;
+        float index2 = timeLeft;
+        while (tmp < index2)
+        {
+            index2 -= tmp;
+            index--;
+        }
+        if (index < 0)
+            index = 0;
         for (int i = 0; i <= SpawnRate; i++)
         {
             if (MaxEnemy > enemyList.Count)
             {
-                OneSpawnRadius(MinRadius, MaxRadius, Enemy[0]);
+                OneSpawnRadius(MinRadius, MaxRadius, Enemy[(int)index]);
             }
         }
     }
@@ -133,7 +156,7 @@ public class World : MonoBehaviour
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
         float randomDistance = Random.Range(min, max);
         Vector3 spawnPosition = player.transform.position + new Vector3(randomDirection.x, randomDirection.y, 0) * randomDistance;
-        GameObject newEnemy = Instantiate(Enemy[0], spawnPosition, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
         enemyList.Add(newEnemy);
         EnemyScript = newEnemy.GetComponent<BasicEnemy>();
         EnemyScript.PlayerObj = player;
@@ -200,4 +223,5 @@ public class World : MonoBehaviour
     {
 
     }
+
 }

@@ -23,11 +23,11 @@ MonoBehaviour:
   AttaqueSpeed: 1
   Armor: 0
   Chance: 0
-  InvulnerabilityTime: 0.5
+  InvulnerabilityTime: 1
   Thorns: 0
   CollectDistance: 1
-  PassifWeaponsList:
+  PassiveWeaponsList:
   - {fileID: 11400000, guid: 0e7dfebfd7b544f4a80c391f3675f28f, type: 2}
-  ActifWeaponsList: []
+  ActiveWeaponsList: []
   UpgradeList: []
   Item: []

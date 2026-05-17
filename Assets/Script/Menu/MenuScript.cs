@@ -62,6 +62,7 @@ public class MenuScript : MonoBehaviour
         {
             GameData.FirstItem = CurrentItem;
             SceneManager.LoadScene(GameData.LevelId);
+            GameData.LevelDuration = 600;
         }
     }
 

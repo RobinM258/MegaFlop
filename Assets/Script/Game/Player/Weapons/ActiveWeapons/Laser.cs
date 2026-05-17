@@ -78,7 +78,6 @@ public class Laser : MonoBehaviour
 
         foreach (Collider2D hit in hits)
         {
-            Debug.Log(hit);
             if (hit.CompareTag("Enemy"))
             {
                 BasicEnemy enemy = hit.GetComponent<BasicEnemy>();
@@ -89,7 +88,6 @@ public class Laser : MonoBehaviour
             }
             else if (hit.CompareTag("Tree"))
             {
-                Debug.Log("Un Arbre !!!!!!!");
                 Vector3 hitPosition = hit.transform.position;
                 ParticleManager.Instance.PlayEffect(ParticleEffectType.TreeDestroy, hitPosition);
                 Destroy(hit.gameObject);

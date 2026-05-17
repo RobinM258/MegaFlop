@@ -26,8 +26,8 @@ MonoBehaviour:
   InvulnerabilityTime: 1
   Thorns: 0
   CollectDistance: 0
-  PassifWeaponsList:
+  PassiveWeaponsList:
   - {fileID: 11400000, guid: 374da5e37e4d546499956da52cccdc81, type: 2}
-  ActifWeaponsList: []
+  ActiveWeaponsList: []
   UpgradeList: []
   Item: []

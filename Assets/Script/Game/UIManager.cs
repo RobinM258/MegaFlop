@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
     public int CurrentSlotId;
 
     [Header("World Stats")]
-    public bool isPaused = false;
     private float deltaTime = 0;
     private float deltaTimeFPS = 0;
 
@@ -21,6 +20,8 @@ public class UIManager : MonoBehaviour
     public GameObject[] LevelUpBtn;
     public GameObject[] StatsBtn;
     public GameObject[] HotBarSlot;
+    public GameObject[] PassiveWeaponBar;
+    public GameObject[] UpgradeBar;
     public GameObject CurrentHotBarSlot;
     public GameObject WorldObj;
     public GameObject PlayerObj;
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        GameData.isPaused = false;
         Time.timeScale = 1f;
     }
     void Start()
@@ -42,8 +44,8 @@ public class UIManager : MonoBehaviour
         WorldScript = WorldObj.GetComponent<World>();
         PlayerScript = PlayerObj.GetComponent<Player>();
         SpellScript = WorldObj.GetComponent<Spells>();
-        if (PlayerScript.playerData.PassifWeaponsList.Count > 0)
-            newSpell = PlayerScript.playerData.PassifWeaponsList[0];
+        if (PlayerScript.playerData.PassiveWeaponsList.Count > 0)
+            newSpell = PlayerScript.playerData.PassiveWeaponsList[0];
     }
 
     // Update is called once per frame
@@ -69,16 +71,16 @@ public class UIManager : MonoBehaviour
 
     public void SwitchGame()
     {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
+        GameData.isPaused = !GameData.isPaused;
+        Time.timeScale = GameData.isPaused ? 0f : 1f;
     }
     public void OnCancel(InputValue value)
     {
-        isPaused = !isPaused;
+        GameData.isPaused = !GameData.isPaused;
         
-        Pannels[0].SetActive(isPaused);
+        Pannels[0].SetActive(GameData.isPaused);
 
-        Time.timeScale = isPaused ? 0f : 1f;
+        Time.timeScale = GameData.isPaused ? 0f : 1f;
     }
 
     // Si pause true le jeu est en pause
@@ -136,6 +138,17 @@ public class UIManager : MonoBehaviour
         TMP_Text Kills = StatsBtn[2].GetComponentInChildren<TMP_Text>();
         string strToDisplay = number.ToString("0");
         Kills.text = strToDisplay;
+    }
+
+    public void DisplayTimer(float timeToDisplay)
+    {
+        TMP_Text TimeText = StatsBtn[3].GetComponentInChildren<TMP_Text>();
+        if(timeToDisplay < 0)
+            timeToDisplay = 0;
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        TimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     // public bool SetUpgrade()
@@ -200,8 +213,8 @@ public class UIManager : MonoBehaviour
             //     else 
             //         tempoItem[i] = WorldScript.item[rdm];
             // }
-            tempoItem[i] = WorldScript.item[rdm];
-            LevelUpBtn[i].GetComponentInChildren<TextMeshProUGUI>().text = WorldScript.item[rdm].itemName;
+            tempoItem[i] = WorldScript.item[i];
+            LevelUpBtn[i].GetComponentInChildren<TextMeshProUGUI>().text = WorldScript.item[i].itemName;
         }
     }
 
@@ -209,7 +222,12 @@ public class UIManager : MonoBehaviour
     {
         newSpell = tempoItem[id];
         SpellScript.SetPassifWeapon(id);
-        PlayerScript.playerData.PassifWeaponsList.Add(tempoItem[id]);
+        PlayerScript.playerData.PassiveWeaponsList.Add(newSpell);
+        // ON pourra enlelver se if quand j'aurais refais le syteme de loot au hasard 
+        if (PlayerScript.playerData.PassiveWeaponsList.Count <= 4)
+        {
+            DisplayPassiveWeapon(newSpell, PlayerScript.playerData.PassiveWeaponsList.Count - 1);
+        }
         ClosePannel(1, false);
     }
 
@@ -224,7 +242,7 @@ public class UIManager : MonoBehaviour
     {
         int MaxSlot = PlayerScript.playerData.ActiveWeaponsList.Count - 1;
         int Index = CurrentSlotId + number;
-        if (!isPaused)
+        if (!GameData.isPaused)
         {
             if (Index < 0)
                 CurrentSlotId = MaxSlot;
@@ -238,7 +256,19 @@ public class UIManager : MonoBehaviour
     }
     public void HotBarManagerKey(int number)
     {
-        if (isPaused)
+        if (GameData.isPaused)
             CurrentSlotId = number;
+    }
+
+    public void DisplayPassiveWeapon(ItemData item, int id)
+    {
+        Image imageDuSlot = PassiveWeaponBar[id].GetComponent<Image>();
+        imageDuSlot.sprite = item.icon;
+    }
+
+    public void DiplayUpgradeBar(ItemData item, int id)
+    {
+        Image imageDuSlot = UpgradeBar[PlayerScript.playerData.UpgradeList.Count - 1].GetComponent<Image>();
+        imageDuSlot.sprite = item.icon;
     }
 }

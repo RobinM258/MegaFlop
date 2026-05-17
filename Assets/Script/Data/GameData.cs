@@ -10,10 +10,13 @@ public static class GameData
     public static ItemData[] ActiveWeaponsList;
     public static ItemData[] ModuleList;
     public static ItemData[] Item;
+
+    //VARIABLE D'ETAT DU NIVEAU
     
+    public static bool isPaused;
+    public static float LevelDuration;
 
-
-    // VARIABLE OBTIMISATION
+    // VARIABLE OPTIMISATION
 
     public static float updateInterval = 0.05f;
 }

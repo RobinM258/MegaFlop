@@ -19,8 +19,8 @@ public class Spells : MonoBehaviour
         playerScript = PlayerObj.GetComponent<Player>();
         Transform Enfant = PlayerObj.transform.Find("ActiveWeaponManager");
         weaponManagerScript = Enfant.GetComponent<WeaponManager>();
-        if (playerScript.playerData.PassifWeaponsList.Count > 0)
-            SetPassifWeapon(playerScript.playerData.PassifWeaponsList[0].id);
+        if (playerScript.playerData.PassiveWeaponsList.Count > 0)
+            SetPassifWeapon(playerScript.playerData.PassiveWeaponsList[0].id);
         UiScript = WorldObj.GetComponent<UIManager>();
     }
 
@@ -34,7 +34,7 @@ public class Spells : MonoBehaviour
     {
         GameObject nouvelObjet = Instantiate(PassifWeaponPrefab[id], PlayerObj.transform);
         nouvelObjet.transform.SetParent(PlayerObj.transform);
-        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);       
+        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);    
     }
     public void SetActifWeapon(ItemData weapon)
     {

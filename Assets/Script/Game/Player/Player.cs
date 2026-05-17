@@ -31,6 +31,10 @@ public class Player : MonoBehaviour
     private Vector2 currentVelocity;
     private Vector2 velocitySmoothing;
 
+    //TOWER
+
+    private float UpdateTimer;
+
     void Start()
     {
         if (GameData.PlayerSelected == null)
@@ -45,11 +49,13 @@ public class Player : MonoBehaviour
         Transform Enfant = transform.Find("ActiveWeaponManager");
         weaponManagerScript = Enfant.GetComponent<WeaponManager>();
         UiScript.DisplayPlayerHealth(playerData.Health, playerData.MaxHealth);
+        UiScript.DisplayPassiveWeapon(playerData.PassiveWeaponsList[0], 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateTimer = Time.deltaTime;
         if (Invulnerability)
         {
             timer += Time.deltaTime;
@@ -57,6 +63,11 @@ public class Player : MonoBehaviour
             {
                 Invulnerability = false;
                 timer = 0;
+            }
+            if (UpdateTimer >= GameData.updateInterval)
+            {
+                TowerDetection();
+                UpdateTimer = 0;  
             }
         }
 
@@ -94,7 +105,7 @@ public class Player : MonoBehaviour
         if (value.isPressed)
         {
             // Time.timeScale
-            if (playerData.ActiveWeaponsList.Count > 0)
+            if (playerData.ActiveWeaponsList.Count > 0 && GameData.isPaused == false)
             {
                 weaponManagerScript.UseWeapon(playerData.ActiveWeaponsList[ui.CurrentSlotId]);
             }
@@ -170,15 +181,24 @@ public class Player : MonoBehaviour
     {
         UIManager ui = WorldObj.GetComponent<UIManager>();
         playerData.Xp -= GetXPRequired(playerData.Level);
-        UiScript.SetDisplayXpLeft();
         ui.SetLevelUpBTn();
         ui.OpenPannel(1, true);
         playerData.Level++;
+        UiScript.SetDisplayXpLeft();
     }
 
     public float GetXPRequired(float level)
     {
         return Mathf.Round(WorldScript.baseXP * Mathf.Pow(level, WorldScript.exponent));
+    }
+
+    public void TowerDetection()
+    {
+        for (int i = 0; i < WorldScript.TowerInLevel.Length; i++)
+        {
+            Vector2 direction = WorldScript.TowerInLevel[i].transform.position - transform.position;
+            float dist = direction.magnitude;
+        }
     }
 
 }

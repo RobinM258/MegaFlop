@@ -24,7 +24,7 @@ public class CameraFollowElastic : MonoBehaviour
     void LateUpdate()
     {
         if (target == null) return;
-        if (!UIManagerScript.isPaused)
+        if (!GameData.isPaused)
         {
             float dt = Time.deltaTime > 0 ? Time.deltaTime : Time.unscaledDeltaTime;
             Vector3 targetVelocity = (target.position - lastTargetPos) / dt;

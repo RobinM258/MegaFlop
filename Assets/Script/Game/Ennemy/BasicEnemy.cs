@@ -31,9 +31,9 @@ public class BasicEnemy : MonoBehaviour
     
     public void GetDamage(float damage)
     {
-        if (myStats.Damage >= myStats.Health)
+        if (damage >= myStats.Health)
             WorldScript.KillEnemy(this.gameObject);
         else
-            myStats.Health = myStats.Health - myStats.Damage;
+            myStats.Health = myStats.Health - damage;
     }
 }
