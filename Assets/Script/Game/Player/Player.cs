@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
             }
             if (UpdateTimer >= GameData.updateInterval)
             {
-                TowerDetection();
+                //TowerDetection();
                 UpdateTimer = 0;  
             }
         }
@@ -127,7 +127,8 @@ public class Player : MonoBehaviour
 
     public void OnTab(InputValue value)
     {
-        WorldScript.Spawner();
+        LevelUp();
+        //WorldScript.Spawner();
         if (playerData.ActiveWeaponsList.Count <= 3)
         {
             playerData.ActiveWeaponsList.Add(tempo);
@@ -192,13 +193,13 @@ public class Player : MonoBehaviour
         return Mathf.Round(WorldScript.baseXP * Mathf.Pow(level, WorldScript.exponent));
     }
 
-    public void TowerDetection()
-    {
-        for (int i = 0; i < WorldScript.TowerInLevel.Length; i++)
-        {
-            Vector2 direction = WorldScript.TowerInLevel[i].transform.position - transform.position;
-            float dist = direction.magnitude;
-        }
-    }
+    // public void TowerDetection()
+    // {
+    //     for (int i = 0; i < WorldScript.TowerInLevel.Length; i++)
+    //     {
+    //         Vector2 direction = WorldScript.TowerInLevel[i].transform.position - transform.position;
+    //         float dist = direction.magnitude;
+    //     }
+    // }
 
 }

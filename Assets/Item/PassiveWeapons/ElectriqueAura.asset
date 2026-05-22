@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
   itemName: Aura
+  itemType: Passive
   icon: {fileID: 3948316311559484057, guid: 1c7b1db29a2cd4845b6ffadd1646d4d9, type: 3}
   description: Elle augmente ton aura
   Level: 1
-  Damage: 10
+  Damage: 3
   Speed: 0
   TotalDamage: 0
-  AttackSpeedBase: 0.7
+  AttackSpeedBase: 1
   AttackSpeed: 1
   PersonalCrit: 0
   PersonnalCritMult: 1
-  Size: 4
+  Size: 1
   Bounce: 0
   ProjectileNumber: 0

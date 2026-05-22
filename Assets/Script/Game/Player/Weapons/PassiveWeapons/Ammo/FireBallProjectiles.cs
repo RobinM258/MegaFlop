@@ -20,6 +20,10 @@ public class FireBallProjectiles : MonoBehaviour
         
     }
 
+    // public void RefreshSize()
+    // {
+    //     transform.localScale = new Vector3(item.Size, item.Size, item.Size);
+    // }
     void CheckBounce()
     {
         if (BounceLeft <= 0)
@@ -41,7 +45,6 @@ public class FireBallProjectiles : MonoBehaviour
         else if (other.CompareTag("Tree"))
         {
             lastTarget = other.gameObject;
-            Debug.Log("Arbre");
             Destroy(other.gameObject);
             BounceLeft--;
             CheckBounce();

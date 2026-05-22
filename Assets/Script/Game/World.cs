@@ -4,21 +4,21 @@ using System.Collections.Generic;
 
 public class World : MonoBehaviour
 {
+    public ItemData tempo;
     [Header("Global Parameter")]
     public GameObject player;
     public GameObject[] Enemy;
     public GameObject[] XpOrb;
     public ItemData[] item;
-    public ItemData[] itemRemains;
     public Transform monCanvas;
     public int Enemytest = 0;
     public float DificultyAugmentation;
     [Header("Spawn Parameter")]
     public float MinRadius;
     public float MaxRadius;
-    private int SpawnRate;
-    private int MaxEnemy = 1000;
-    private float RefreshTime = 3f;
+    private int SpawnRate = 5;
+    private int MaxEnemy = 5000;
+    private float RefreshTime = 5f;
     private float timer;
     private float timerUpdate;
     private Player playerScript;
@@ -34,20 +34,17 @@ public class World : MonoBehaviour
     private ParticleHandler particleHandler;
 
     // TIMER
+    [Header("Réglage Timer et dificulté")]
     public float timeLeft;
     public float DificultyIndex;
-
-    // TOWER
-    public GameObject[] TowerInLevel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        enemyList.Clear();
         if (GameData.LevelDuration <= 0)
             GameData.LevelDuration = 600;
-        ItemData[] itemRemains = item;
         playerScript = player.GetComponent<Player>();
-        SpawnRate = 5;
         for (int i = 0; i < Enemytest; i++)
         {
             GameObject newEnemy = Instantiate(Enemy[0], new Vector3(4, 4, 0), Quaternion.identity);
@@ -60,7 +57,7 @@ public class World : MonoBehaviour
         DificultyIndex = Enemy.Length;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         timer += Time.deltaTime;
         timerUpdate += Time.deltaTime;
@@ -85,15 +82,18 @@ public class World : MonoBehaviour
     {
         for (int i = 0; i < enemyList.Count; i++)
         {
+            if (enemyList[i] == null) 
+                continue;
             Vector3 direction = player.transform.position - enemyList[i].transform.position;
-            enemyList[i].transform.position += direction.normalized * EnemyScript.enemyData.MovementSpeed * Time.deltaTime;
+            EnemyScript = enemyList[i].GetComponent<BasicEnemy>();
+            enemyList[i].transform.position += direction.normalized * EnemyScript.enemyData.MovementSpeed * GameData.updateInterval;
         }
 
         for (int i = 0; i < orbList.Count; i++)
         {
             Vector3 direction = player.transform.position - orbList[i].transform.position;
             if (direction.magnitude <= playerScript.playerData.CollectDistance && direction.magnitude > 1)
-                orbList[i].transform.position += direction.normalized * 10 * Time.deltaTime;
+                orbList[i].transform.position += direction.normalized * 10 * GameData.updateInterval;
             else if (direction.magnitude <= 1)
             {
                 GameObject current = orbList[i];
@@ -218,10 +218,22 @@ public class World : MonoBehaviour
         return closest;
     }
 
+    public void Temp()
+    {
+        // Vector3 spawnPosition = new Vector3(4, 4, 0);
+        // GameObject enemy = Enemy[0];
+        // GameObject newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
+        // enemyList.Add(newEnemy);
+        // EnemyScript = newEnemy.GetComponent<BasicEnemy>();
+        // EnemyScript.PlayerObj = player;
+        // EnemyScript.WorldObj = this.gameObject;
+        // playerScript.UiScript.SetRarityLoot();
+        playerScript.UiScript.SetLevelUpBTn();
+    }
+
     
     void UnSpawnDist()
     {
-
     }
 
 }

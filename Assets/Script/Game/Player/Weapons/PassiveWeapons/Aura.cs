@@ -3,23 +3,19 @@ using UnityEngine;
 public class Aura : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private ItemData item;
-    public ItemData itemRef;
     public float timer;
     public GameObject WorldObj;
     private Spells spellScrypt;
     private UIManager uiScript;
+    private ItemStats itemStats;
 
     void Start()
     {
-        ItemData instanceData = ScriptableObject.CreateInstance<ItemData>();
-        instanceData.CopyFrom(itemRef);
-        item = instanceData;
+        itemStats = GetComponent<ItemStats>();
         WorldObj = GameObject.Find("World");
         Spells spellScrypt = WorldObj.GetComponent<Spells>();
         UIManager uiScript = WorldObj.GetComponent<UIManager>();
-        item = uiScript.newSpell;
-        SpellStart();
+        itemStats.item = uiScript.newItem;;
     }
 
     // Update is called once per frame
@@ -28,19 +24,19 @@ public class Aura : MonoBehaviour
         timer += Time.deltaTime;
     }
 
-    void SpellStart()
+    public void RefreshSize()
     {
-        transform.localScale = new Vector3(item.Size, item.Size, item.Size);
+        transform.localScale = new Vector3(itemStats.item.Size, itemStats.item.Size, itemStats.item.Size);
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
-            if (timer > item.AttackSpeedBase / item.AttackSpeed)
+            if (timer > itemStats.item.AttackSpeedBase / itemStats.item.AttackSpeed)
             {
                 BasicEnemy target = other.gameObject.GetComponent<BasicEnemy>();
-                target.GetDamage(item.Damage);
+                target.GetDamage(itemStats.item.Damage);
                 timer = 0f;
             }
         }

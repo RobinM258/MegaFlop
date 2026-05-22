@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Spells : MonoBehaviour
 {
@@ -10,9 +11,13 @@ public class Spells : MonoBehaviour
     private Player playerScript;
     private WeaponManager weaponManagerScript;
     private UIManager UiScript;
-    public GameObject[] PassifWeaponPrefab;
+    public GameObject[] PassiveWeaponPrefab;
     public GameObject[] AmmoPrefab;
+    public ItemData[] PassiveWeaponItem;
+    public ItemData[] UpgradeItem;
 
+    [SerializeField]
+    public List<ItemStats> itemstats = new List<ItemStats>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +25,7 @@ public class Spells : MonoBehaviour
         Transform Enfant = PlayerObj.transform.Find("ActiveWeaponManager");
         weaponManagerScript = Enfant.GetComponent<WeaponManager>();
         if (playerScript.playerData.PassiveWeaponsList.Count > 0)
-            SetPassifWeapon(playerScript.playerData.PassiveWeaponsList[0].id);
+            SetPassiveWeapon(playerScript.playerData.PassiveWeaponsList[0].id);
         UiScript = WorldObj.GetComponent<UIManager>();
     }
 
@@ -30,11 +35,12 @@ public class Spells : MonoBehaviour
 
     }
 
-    public void SetPassifWeapon(int id)
+    public void SetPassiveWeapon(int id)
     {
-        GameObject nouvelObjet = Instantiate(PassifWeaponPrefab[id], PlayerObj.transform);
+        GameObject nouvelObjet = Instantiate(PassiveWeaponPrefab[id], PlayerObj.transform);
         nouvelObjet.transform.SetParent(PlayerObj.transform);
-        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);    
+        nouvelObjet.transform.localPosition = new Vector3(0, 0, 1.5f);
+        itemstats.Add(nouvelObjet.GetComponent<ItemStats>());   
     }
     public void SetActifWeapon(ItemData weapon)
     {

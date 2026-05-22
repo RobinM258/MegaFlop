@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SIzeModule
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: 
+  itemName: Size Module
+  itemType: Module
   icon: {fileID: 3481834964117238371, guid: 0d4c8a7ab0672ea4a9a17e257515b989, type: 3}
   description: 
   Level: 0

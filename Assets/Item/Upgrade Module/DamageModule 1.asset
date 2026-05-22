@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: DamageModule 1
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: 
+  itemName: Damage Module
+  itemType: Module
   icon: {fileID: -2208486971647432776, guid: 7835877a89b1c91438f0c31716d27f48, type: 3}
   description: 
   Level: 0

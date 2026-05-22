@@ -21,7 +21,7 @@ public class PlayerData : ScriptableObject
 
     public List<ItemData> PassiveWeaponsList = new List<ItemData>();
     public List<ItemData> ActiveWeaponsList = new List<ItemData>();
-    public List<UpgradeData> UpgradeList = new List<UpgradeData>();
+    public List<ItemData> UpgradeList = new List<ItemData>();
     public List<ItemData> Item = new List<ItemData>();
 
     public void CopyFrom(PlayerData other)
@@ -44,7 +44,7 @@ public class PlayerData : ScriptableObject
 
         this.PassiveWeaponsList = new List<ItemData>(other.PassiveWeaponsList);
         this.ActiveWeaponsList = new List<ItemData>(other.ActiveWeaponsList);
-        this.UpgradeList = new List<UpgradeData>(other.UpgradeList);
+        this.UpgradeList = new List<ItemData>(other.UpgradeList);
         this.Item = new List<ItemData>(other.Item);
     }
     public PlayerData() {}

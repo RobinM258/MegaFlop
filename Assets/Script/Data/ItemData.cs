@@ -1,10 +1,12 @@
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName = "NouvelItem", menuName = "MegaFlop/Item")]
 public class ItemData : ScriptableObject
 {
     public int id;
     public string itemName;
+    public string itemType;
     public Sprite icon;
     public string description;
     public int Level;
@@ -23,6 +25,7 @@ public class ItemData : ScriptableObject
     {
         this.id = other.id;
         this.itemName = other.itemName;
+        this.itemType = other.itemType;
         this.icon = other.icon;
         this.description = other.description;
         this.Level = other.Level;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1113710786825593663}
   - component: {fileID: 1263033258012679715}
+  - component: {fileID: -7288547314360049776}
   m_Layer: 8
   m_Name: FireballWeapon
   m_TagString: Untagged
@@ -50,3 +51,17 @@ MonoBehaviour:
   WorldObj: {fileID: 0}
   FireBallProjectilesObj: {fileID: 0}
   AmmoList: []
+--- !u!114 &-7288547314360049776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927761143915131415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8783443f58072a44989dbbbeeebfe2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemStats
+  item: {fileID: 0}
+  itemRef: {fileID: 11400000, guid: 0e7dfebfd7b544f4a80c391f3675f28f, type: 2}

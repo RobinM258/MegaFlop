@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class MenuScript : MonoBehaviour
     public GameObject CurrentPannel;
     public PlayerData[] PlayerList;
 
+    //LEVEL
     private bool LevelSelected;
     private bool PlayerSelected;
 
@@ -16,6 +18,8 @@ public class MenuScript : MonoBehaviour
     public ItemData[] ModuleList;
     public ItemData[] Item;
     public ItemData CurrentItem;
+
+    //SETTINGS
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -93,4 +97,8 @@ public class MenuScript : MonoBehaviour
         CurrentItem = PassifWeaponList[id];
         PlayerSelected = true;
     }
+
+
+    //SETTING
+
 }

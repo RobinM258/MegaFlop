@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class FireBall : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public ItemData item;
-    public ItemData itemRef;
     public float timer;
     public GameObject WorldObj;
     public GameObject FireBallProjectilesObj;
@@ -13,18 +11,19 @@ public class FireBall : MonoBehaviour
     private UIManager uiScript;
     private World worldScript;
     private float BounceLeft;
+    private ItemStats itemStats;
+    public ItemData item;
     public List<GameObject> AmmoList = new List<GameObject>();
 
     void Start()
     {
-        ItemData instanceData = ScriptableObject.CreateInstance<ItemData>();
-        instanceData.CopyFrom(itemRef);
-        item = instanceData;
+        itemStats = GetComponent<ItemStats>();
+        item = itemStats.item;
         WorldObj = GameObject.Find("World");
         spellScrypt = WorldObj.GetComponent<Spells>();
         uiScript = WorldObj.GetComponent<UIManager>();
         worldScript = WorldObj.GetComponent<World>();
-        item = uiScript.newSpell;
+        itemStats.item = uiScript.newItem;
         FireBallProjectilesObj = spellScrypt.AmmoPrefab[0];
     }
 

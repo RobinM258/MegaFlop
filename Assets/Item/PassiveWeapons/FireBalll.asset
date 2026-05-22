@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 1
   itemName: FireBall
+  itemType: Passive
   icon: {fileID: 6445941603473202802, guid: 8c791e5a0a0f314448b53530e6e3ef14, type: 3}
   description: Elle brule
   Level: 1
-  Damage: 2
+  Damage: 1
   Speed: 10
   TotalDamage: 0
   AttackSpeedBase: 3
   AttackSpeed: 1
   PersonalCrit: 0
   PersonnalCritMult: 1
-  Size: 4
+  Size: 1
   Bounce: 2
   ProjectileNumber: 1

@@ -16,6 +16,8 @@ public static class GameData
     public static bool isPaused;
     public static float LevelDuration;
 
+    //VARIABLE DE SETTINGS
+
     // VARIABLE OPTIMISATION
 
     public static float updateInterval = 0.05f;

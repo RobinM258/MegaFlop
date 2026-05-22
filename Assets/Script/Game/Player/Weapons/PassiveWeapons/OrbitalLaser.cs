@@ -11,8 +11,6 @@ public struct SlotData
 public class OrbitalLaser : MonoBehaviour
 {
     public float timer;
-    private ItemData item;
-    public ItemData itemRef;
     private Spells spellScrypt;
     public GameObject OrbitalLaserProjectil;
     private UIManager uiScript;
@@ -20,19 +18,19 @@ public class OrbitalLaser : MonoBehaviour
     private World worldScript;
     
     public List<SlotData> ammoList = new List<SlotData>();
-    
     public List<GameObject> enemyBlackList = new List<GameObject>();
+    private ItemStats itemStats;
+    private ItemData item;
 
     void Start()
     {
-        ItemData instanceData = ScriptableObject.CreateInstance<ItemData>();
-        instanceData.CopyFrom(itemRef);
-        item = instanceData;
+        itemStats = GetComponent<ItemStats>();
+        item = itemStats.item;
         WorldObj = GameObject.Find("World");
         spellScrypt = WorldObj.GetComponent<Spells>();
         uiScript = WorldObj.GetComponent<UIManager>();
         worldScript = WorldObj.GetComponent<World>();
-        item = uiScript.newSpell;
+        item = uiScript.newItem;
         OrbitalLaserProjectil = spellScrypt.AmmoPrefab[1];
     }
 

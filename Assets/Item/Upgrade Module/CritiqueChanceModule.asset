@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: CritiqueChanceModule
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: 
+  itemName: Critique Chance Module
+  itemType: Module
   icon: {fileID: 6497769772873202255, guid: fefba0c2f10924947a086f8d04596576, type: 3}
   description: 
   Level: 0
