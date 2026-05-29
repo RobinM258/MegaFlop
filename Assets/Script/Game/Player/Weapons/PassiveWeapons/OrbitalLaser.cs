@@ -11,7 +11,7 @@ public struct SlotData
 public class OrbitalLaser : MonoBehaviour
 {
     public float timer;
-    private Spells spellScrypt;
+    private Spells spellScript;
     public GameObject OrbitalLaserProjectil;
     private UIManager uiScript;
     public GameObject WorldObj;
@@ -22,22 +22,26 @@ public class OrbitalLaser : MonoBehaviour
     private ItemStats itemStats;
     private ItemData item;
 
+
+    private float Damage;
+    private float AttackSpeed;
+
     void Start()
     {
         itemStats = GetComponent<ItemStats>();
         item = itemStats.item;
         WorldObj = GameObject.Find("World");
-        spellScrypt = WorldObj.GetComponent<Spells>();
+        spellScript = WorldObj.GetComponent<Spells>();
         uiScript = WorldObj.GetComponent<UIManager>();
         worldScript = WorldObj.GetComponent<World>();
-        item = uiScript.newItem;
-        OrbitalLaserProjectil = spellScrypt.AmmoPrefab[1];
+        OrbitalLaserProjectil = spellScript.AmmoPrefab[1];
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > item.AttackSpeedBase * item.AttackSpeed && worldScript.enemyList.Count > 0)
+        AttackSpeed = itemStats.item.AttackSpeed +  spellScript.PlayerScript.GetItemStat("AttackSpeed", spellScript.PlayerScript.playerData.UpgradeList);
+        if (timer > item.AttackSpeedBase / AttackSpeed && worldScript.enemyList.Count > 0)
         {
             SpellStart();
             timer = 0;
@@ -64,7 +68,8 @@ public class OrbitalLaser : MonoBehaviour
                 BasicEnemy enemy = slot.target.GetComponent<BasicEnemy>();
                 if (enemy != null)
                 {
-                    enemy.GetDamage(item.Damage);
+                    Damage = itemStats.item.Damage + spellScript.PlayerScript.GetItemStat("Damage", spellScript.PlayerScript.playerData.UpgradeList);
+                    enemy.GetDamage(Damage);
                 }
     
                 enemyBlackList.Remove(slot.target);

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b80b814fa3709eb4083162ad4f1946a3, type: 3}
-  m_Name: DamageModule 1
+  m_Name: DamageModule
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: Damage Module
+  itemName: DamageModule
   itemType: Module
   icon: {fileID: -2208486971647432776, guid: 7835877a89b1c91438f0c31716d27f48, type: 3}
   description: 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CritiqueModule
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: Critique Module
+  itemName: CritiqueModule
   itemType: Module
   icon: {fileID: 5078614196728712073, guid: af127e8d4990d64458d9197f9bb7d6ed, type: 3}
   description: 

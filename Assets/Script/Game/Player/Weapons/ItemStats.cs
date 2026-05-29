@@ -3,17 +3,28 @@ using UnityEngine;
 public class ItemStats : MonoBehaviour
 {
     public ItemData item;
-    public ItemData itemRef;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    [SerializeField]
+    private ItemData itemRef;
+
+    public void SetUpItem()
     {
+        if (item != null)
+            return;
         ItemData instanceData = ScriptableObject.CreateInstance<ItemData>();
         instanceData.CopyFrom(itemRef);
         item = instanceData;
-
     }
 
-    // Update is called once per frame
+    public void RefreshSize()
+    {
+        transform.localScale = new Vector3(item.Size, item.Size, item.Size);
+    }
+
+    void Awake()
+    {
+        SetUpItem();
+    }
+
     void Update()
     {
         

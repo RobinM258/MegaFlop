@@ -12,6 +12,8 @@ public class BasicEnemy : MonoBehaviour
     public GameObject PlayerObj;
     public GameObject WorldObj;
     private World WorldScript;
+    public GameObject damagePopupPrefab;
+    public Transform SC_DamageIndicatorList;  
 
 
     //COLISION
@@ -25,7 +27,7 @@ public class BasicEnemy : MonoBehaviour
         instanceData.CopyFrom(enemyData); 
         myStats = instanceData;
         WorldScript = WorldObj.GetComponent<World>();
-        // On s'assure que l'ennemi est enregistré dans la grille dès le départ
+        SC_DamageIndicatorList = WorldScript.SC_DamageIndicatorList;
         RegisterInGrid();
     }
 
@@ -55,6 +57,10 @@ public class BasicEnemy : MonoBehaviour
     
     public void GetDamage(float damage)
     {
+        Vector3 spawnPosition = transform.position + new Vector3(0, 0f, 0);
+        GameObject popupGo = Instantiate(damagePopupPrefab, spawnPosition, Quaternion.identity, SC_DamageIndicatorList);
+        DamageIndicator popupScript = popupGo.GetComponent<DamageIndicator>();
+        popupScript.Setup(damage);
         if (damage >= myStats.Health)
             WorldScript.KillEnemy(this.gameObject);
         else

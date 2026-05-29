@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ElectriqueAura
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: Aura
+  itemName: ElectriqueAura
   itemType: Passive
   icon: {fileID: 3948316311559484057, guid: 1c7b1db29a2cd4845b6ffadd1646d4d9, type: 3}
   description: Elle augmente ton aura
@@ -25,6 +25,6 @@ MonoBehaviour:
   AttackSpeed: 1
   PersonalCrit: 0
   PersonnalCritMult: 1
-  Size: 1
+  Size: 4
   Bounce: 0
   ProjectileNumber: 0

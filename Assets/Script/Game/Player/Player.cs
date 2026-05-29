@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System.Reflection;
 
 public class Player : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
         weaponManagerScript = Enfant.GetComponent<WeaponManager>();
         UiScript.DisplayPlayerHealth(playerData.Health, playerData.MaxHealth);
         UiScript.DisplayPassiveWeapon(playerData.PassiveWeaponsList[0], 0);
+        playerData.MaxBlood = 100;
     }
 
     // Update is called once per frame
@@ -84,6 +86,8 @@ public class Player : MonoBehaviour
         transform.position += (Vector3)(currentVelocity * Time.deltaTime);
     }
 
+
+    // IMPUT CONTROLLER
     public void OnMove(InputValue value)
     {
         direction = value.Get<Vector2>();
@@ -136,6 +140,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    // GET
+
     public void GetDamage(float damage)
     {
         if (playerData.Health <= 1)
@@ -156,6 +162,35 @@ public class Player : MonoBehaviour
         UiScript.DisplayPlayerHealth(playerData.Health, playerData.MaxHealth);
     }
 
+        public float GetXPRequired(float level)
+    {
+        return Mathf.Round(WorldScript.baseXP * Mathf.Pow(level, WorldScript.exponent));
+    }
+
+    public float GetItemStat(string name, List<ItemData> list)
+    {
+        float value = 0;
+        foreach(ItemData module in list)
+        {
+            System.Type typeOfItem = module.GetType();
+            FieldInfo[] variables = typeOfItem.GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (FieldInfo champ in variables)
+            {
+                if (champ.Name == name)
+                {
+                    object valeurDeLaVariable = champ.GetValue(module); 
+                    value = (float)valeurDeLaVariable;
+                    if (value > 0)
+                        return value;
+                }
+            }
+        }
+        return value;
+    }
+
+    //COLLISION
+
     void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && Invulnerability == false)
@@ -168,38 +203,31 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AddXp(float nb)
+    public void AddSouls(float nb)
     {
-        playerData.Xp += nb;
+        playerData.Souls += nb;
         UiScript.SetDisplayXpLeft();
-        while (playerData.Xp >= GetXPRequired(playerData.Level))
+        while (playerData.Souls >= GetXPRequired(playerData.Level))
         {
             LevelUp();
         }
     }
 
+    public void AddBlood(float nb)
+    {
+        if (playerData.Blood + nb > playerData.MaxBlood)
+            playerData.Blood = playerData.MaxBlood;
+        else 
+            playerData.Blood += nb;   
+    }
     public void LevelUp()
     {
         UIManager ui = WorldObj.GetComponent<UIManager>();
-        playerData.Xp -= GetXPRequired(playerData.Level);
+        playerData.Souls -= GetXPRequired(playerData.Level);
         ui.SetLevelUpBTn();
         ui.OpenPannel(1, true);
         playerData.Level++;
         UiScript.SetDisplayXpLeft();
     }
-
-    public float GetXPRequired(float level)
-    {
-        return Mathf.Round(WorldScript.baseXP * Mathf.Pow(level, WorldScript.exponent));
-    }
-
-    // public void TowerDetection()
-    // {
-    //     for (int i = 0; i < WorldScript.TowerInLevel.Length; i++)
-    //     {
-    //         Vector2 direction = WorldScript.TowerInLevel[i].transform.position - transform.position;
-    //         float dist = direction.magnitude;
-    //     }
-    // }
 
 }

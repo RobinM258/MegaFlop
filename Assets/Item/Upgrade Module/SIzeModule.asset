@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b80b814fa3709eb4083162ad4f1946a3, type: 3}
-  m_Name: SIzeModule
+  m_Name: SizeModule
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: Size Module
+  itemName: SizeModule
   itemType: Module
   icon: {fileID: 3481834964117238371, guid: 0d4c8a7ab0672ea4a9a17e257515b989, type: 3}
   description: 

@@ -109,6 +109,10 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 6641ebc0dc30b2f4496dd20eb3c753c2, type: 2}
   PlayerObj: {fileID: 0}
   WorldObj: {fileID: 0}
+  damagePopupPrefab: {fileID: 6020460614025481897, guid: cd3639c6a2a576e4fbd6116017d40ee5, type: 3}
+  currentCellID: 0
+  currentCoords: {x: 0, y: 0}
+  enemyinCell: 0
 --- !u!50 &6937798523016580433
 Rigidbody2D:
   serializedVersion: 5

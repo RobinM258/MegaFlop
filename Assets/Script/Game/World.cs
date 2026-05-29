@@ -16,6 +16,9 @@ public class World : MonoBehaviour
     [Header("Spawn Parameter")]
     public float MinRadius;
     public float MaxRadius;
+    public Transform SC_EnemyList;
+    public Transform SC_FireballList;
+    public Transform SC_DamageIndicatorList;  
     private int SpawnRate = 5;
     private int MaxEnemy = 5000;
     private float RefreshTime = 5f;
@@ -29,6 +32,7 @@ public class World : MonoBehaviour
     [Header("Réglage XP")]
     public float baseXP = 5f;
     public float exponent = 1.5f;
+    public Transform SC_SoulsList;
 
     //PARTICULE
     private ParticleHandler particleHandler;
@@ -98,7 +102,7 @@ public class World : MonoBehaviour
             {
                 GameObject current = orbList[i];
                 XpOrb xp = current.GetComponent<XpOrb>();
-                playerScript.AddXp(xp.xpValue);
+                playerScript.AddSouls(xp.xpValue);
                 orbList.Remove(current);
                 Destroy(current);
             }
@@ -116,8 +120,8 @@ public class World : MonoBehaviour
             if (Random.Range(0, 2) != 0)
             {
                 Vector3 spawnPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -1.4f);
-                GameObject newOrb = Instantiate(XpOrb[0], spawnPos, Quaternion.identity);
-                orbList.Add(newOrb);
+                GameObject newSoul = Instantiate(XpOrb[0], spawnPos, Quaternion.identity, SC_SoulsList);
+                orbList.Add(newSoul);
             }
             playerScript.EnemyKill++;   
             playerScript.UiScript.DisplayNumberKill(playerScript.EnemyKill);
@@ -156,7 +160,7 @@ public class World : MonoBehaviour
         Vector2 randomDirection = Random.insideUnitCircle.normalized;
         float randomDistance = Random.Range(min, max);
         Vector3 spawnPosition = player.transform.position + new Vector3(randomDirection.x, randomDirection.y, 0) * randomDistance;
-        GameObject newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity, SC_EnemyList);
         enemyList.Add(newEnemy);
         EnemyScript = newEnemy.GetComponent<BasicEnemy>();
         EnemyScript.PlayerObj = player;

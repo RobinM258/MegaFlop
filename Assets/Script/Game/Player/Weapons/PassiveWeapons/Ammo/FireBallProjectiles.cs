@@ -7,6 +7,7 @@ public class FireBallProjectiles : MonoBehaviour
     public float BounceLeft;
 
     private GameObject lastTarget;
+    private float Damage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +27,7 @@ public class FireBallProjectiles : MonoBehaviour
     // }
     void CheckBounce()
     {
-        if (BounceLeft <= 0)
+        if (BounceLeft < 1)
             Destroy(this.gameObject);
         else
             FireBallScript.Newtarget(this.gameObject, lastTarget);
@@ -38,7 +39,8 @@ public class FireBallProjectiles : MonoBehaviour
         {
             lastTarget = other.gameObject;
             BasicEnemy target = other.gameObject.GetComponent<BasicEnemy>();
-            target.GetDamage(FireBallScript.item.Damage);
+            Damage = FireBallScript.itemStats.item.Damage + FireBallScript.spellScript.PlayerScript.GetItemStat("Damage", FireBallScript.spellScript.PlayerScript.playerData.UpgradeList);
+            target.GetDamage(Damage);
             BounceLeft--;
             CheckBounce();
         }

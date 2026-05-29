@@ -97,47 +97,47 @@ public static CollisionController Test;
         gridBuckets[newCell].Add(entity);
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.green;
-    //     Vector3 pos = transform.position;
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Vector3 pos = transform.position;
 
-    //     int previewCols = Mathf.CeilToInt(mapSize.x / cellSize.x);
-    //     int previewRows = Mathf.CeilToInt(mapSize.y / cellSize.y);
+        int previewCols = Mathf.CeilToInt(mapSize.x / cellSize.x);
+        int previewRows = Mathf.CeilToInt(mapSize.y / cellSize.y);
 
-    //     // Dessiner les lignes verticales (Axe X)
-    //     for (int i = 0; i <= previewCols; i++)
-    //     {
-    //         float xOffset = (i * cellSize.x) - (mapSize.x / 2f);
-    //         Vector3 start = pos + new Vector3(xOffset, -mapSize.y / 2f, 0);
-    //         Vector3 end = pos + new Vector3(xOffset, mapSize.y / 2f, 0);
-    //         Gizmos.DrawLine(start, end);
-    //     }
+        // Dessiner les lignes verticales (Axe X)
+        for (int i = 0; i <= previewCols; i++)
+        {
+            float xOffset = (i * cellSize.x) - (mapSize.x / 2f);
+            Vector3 start = pos + new Vector3(xOffset, -mapSize.y / 2f, 0);
+            Vector3 end = pos + new Vector3(xOffset, mapSize.y / 2f, 0);
+            Gizmos.DrawLine(start, end);
+        }
 
-    //     // Dessiner les lignes horizontales (Axe Y)
-    //     for (int j = 0; j <= previewRows; j++)
-    //     {
-    //         float yOffset = (j * cellSize.y) - (mapSize.y / 2f);
-    //         Vector3 start = pos + new Vector3(-mapSize.x / 2f, yOffset, 0);
-    //         Vector3 end = pos + new Vector3(mapSize.x / 2f, yOffset, 0);
-    //         Gizmos.DrawLine(start, end);
-    //     }
-    //     if (Application.isPlaying && gridBuckets != null)
-    //     {
-    //         foreach (var bucket in gridBuckets)
-    //         {
-    //             // On calcule la position du texte (centre de la case)
-    //             int col = bucket.Key % columns;
-    //             int row = bucket.Key / columns;
-    //             Vector3 cellPos = transform.position + new Vector3(
-    //                 (col * cellSize.x) - (mapSize.x / 2f) + (cellSize.x / 2f),
-    //                 (row * cellSize.y) - (mapSize.y / 2f) + (cellSize.y / 2f),
-    //                 0
-    //             );
-    //             UnityEditor.Handles.Label(cellPos, bucket.Value.Count.ToString());
-    //         }
-    //     }
-    // }
+        // Dessiner les lignes horizontales (Axe Y)
+        for (int j = 0; j <= previewRows; j++)
+        {
+            float yOffset = (j * cellSize.y) - (mapSize.y / 2f);
+            Vector3 start = pos + new Vector3(-mapSize.x / 2f, yOffset, 0);
+            Vector3 end = pos + new Vector3(mapSize.x / 2f, yOffset, 0);
+            Gizmos.DrawLine(start, end);
+        }
+        if (Application.isPlaying && gridBuckets != null)
+        {
+            foreach (var bucket in gridBuckets)
+            {
+                // On calcule la position du texte (centre de la case)
+                int col = bucket.Key % columns;
+                int row = bucket.Key / columns;
+                Vector3 cellPos = transform.position + new Vector3(
+                    (col * cellSize.x) - (mapSize.x / 2f) + (cellSize.x / 2f),
+                    (row * cellSize.y) - (mapSize.y / 2f) + (cellSize.y / 2f),
+                    0
+                );
+                UnityEditor.Handles.Label(cellPos, bucket.Value.Count.ToString());
+            }
+        }
+    }
     public List<GameObject> GetNearbyEntities(Vector2 worldPosition)
     {
         List<GameObject> nearbyEntities = new List<GameObject>();

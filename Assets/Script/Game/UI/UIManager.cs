@@ -156,7 +156,7 @@ public class UIManager : MonoBehaviour
     {
         TMP_Text XPCount = StatsBtn[0].GetComponentInChildren<TMP_Text>();
         
-        string strToDisplay = "XP : " + PlayerScript.playerData.Xp + " / " + PlayerScript.GetXPRequired(PlayerScript.playerData.Level);
+        string strToDisplay = "XP : " + PlayerScript.playerData.Souls + " / " + PlayerScript.GetXPRequired(PlayerScript.playerData.Level);
         XPCount.text = strToDisplay;
     }
 
@@ -210,49 +210,84 @@ public class UIManager : MonoBehaviour
         }
         return -1;
     }
-    float SetRarityFromStats(string statsName)
+    ItemData GetItemRef(string name)
     {
-        int rdm = SetRarityLoot();
-        List<float> weaponStats = new List<float> { 0.1f, 0.1f, 0.08f, 0.07f, 0.04f, 0.04f, 0.2f };
-        float upStats = 0f;
-        switch (statsName)
+        ItemData item;
+        ItemData[] PassiveWeaponItemRef = SpellScript.PassiveWeaponItem;
+        ItemData[] UpgradeItemRef = SpellScript.UpgradeItem;
+
+        for (int i = 0; i < PassiveWeaponItemRef.Length; i++)
         {
-            case "Damage":
-               upStats = weaponStats[0] * rdm + 1;
-                break;
-            case "Speed":
-               upStats = weaponStats[1] * rdm + 1;
-                break;
-            case "AttackSpeed":
-               upStats = weaponStats[2] * rdm + 1;
-                break;
-            case "Size":
-               upStats = weaponStats[3] * rdm + 1;
-                break;
-            case "PersonalCrit":
-               upStats = weaponStats[4] * rdm + 1;
-                break;
-            case "PersonnalCritMult":
-               upStats = weaponStats[5] * rdm + 1;
-                break;
-            case "Bounce":
-               upStats = weaponStats[6] * rdm + 1;
-                break;
+            if(PassiveWeaponItemRef[i].name == name)
+            {
+                item = PassiveWeaponItemRef[i];
+                return item;
+            }
+        }
+        for (int i = 0; i < UpgradeItemRef.Length; i++)
+        {
+            Debug.Log(UpgradeItemRef[i].name + " | " + name);
+            if(UpgradeItemRef[i].name == name)
+            {
+                item = UpgradeItemRef[i];
+                return item;
+            }
+        }
+        return null;
+    }
+
+    List<float> GetItemStats(ItemData item)
+    {
+        List<float> RetList = new List<float>();
+        System.Type typeOfItem = item.GetType();
+        FieldInfo[] variables = typeOfItem.GetFields(BindingFlags.Public | BindingFlags.Instance);
+        foreach (FieldInfo champ in variables)
+        {  
+            object valeurDeLaVariable = champ.GetValue(item); 
+            System.Type typeDeLaVariable = champ.FieldType;
+
+            if (valeurDeLaVariable == null)
+                continue;
+            if (typeDeLaVariable == typeof(float))
+                RetList.Add((float)valeurDeLaVariable);
+        }
+        return RetList;
+    }
+
+    float SetRarityFromStats(string statsName, ItemData item)
+    {
+        float upStats = 0;
+        int rdm = SetRarityLoot();
+        ItemData itemRef = GetItemRef(item.itemName);
+        Debug.Log(itemRef);
+        System.Type typeOfItem = itemRef.GetType();
+        FieldInfo[] variables = typeOfItem.GetFields(BindingFlags.Public | BindingFlags.Instance);
+         foreach (FieldInfo champ in variables)
+        {  
+            if (champ.Name == statsName)
+            {
+                object valeurDeLaVariable = champ.GetValue(itemRef); 
+                float value = 0;
+                if (champ.Name == "PersonalCrit" || champ.Name == "PersonnalCritMult")
+                    value = 50;
+                else 
+                    value = (float)valeurDeLaVariable;
+                upStats = value * rdm / 10;
+            }
         }
         return upStats;
     }
 
     public float SetUpgradeWeapon(ItemData item)
     {
-        List<string> weaponStats = new List<string> { "Damage", "Speed", "AttackSpeed", "Size", "PersonalCrit", "PersonnalCritMult", "Bounce" };
+        List<string> weaponStats = new List<string> { "Damage", "Speed", "AttackSpeed", "Size", "PersonalCrit", "PersonnalCritMult", "Bounce", "ProjectileNumber" };
         System.Type typeOfItem = item.GetType();
         FieldInfo[] variables = typeOfItem.GetFields(BindingFlags.Public | BindingFlags.Instance);
         int index = 0;
         foreach (FieldInfo champ in variables)
         {
             if (weaponStats.Contains(champ.Name))
-            {
-                string nomDeLaVariable = champ.Name;         
+            {      
                 object valeurDeLaVariable = champ.GetValue(item); 
                 System.Type typeDeLaVariable = champ.FieldType;
 
@@ -303,7 +338,7 @@ public class UIManager : MonoBehaviour
                 if (GoodValue && rdm == index)
                 {  
                     nameStats = nomDeLaVariable;
-                    float up = SetRarityFromStats(nomDeLaVariable);
+                    float up = SetRarityFromStats(nomDeLaVariable, item);
                     return up;
                 }
                 else if (GoodValue)
@@ -421,11 +456,11 @@ public class UIManager : MonoBehaviour
             else if (choixSelectionne == "Upgrade")
             {
                 tempoItem[i] = null;
-                if (PlayerScript.playerData.PassiveWeaponsList.Count > 0)
+                if (PlayerScript.playerData.PassiveWeaponsList.Count > 0 && PlayerScript.playerData.UpgradeList.Count == 0)
                 {
                     itemToUpgrade = SetRandomItem(PlayerScript.playerData.PassiveWeaponsList, choixPris);
                 }
-                else if (PlayerScript.playerData.UpgradeList.Count > 0)
+                else if (PlayerScript.playerData.UpgradeList.Count > 0 && PlayerScript.playerData.PassiveWeaponsList.Count == 0)
                 {
                     itemToUpgrade = SetRandomItem(PlayerScript.playerData.UpgradeList, choixPris);
                 }
@@ -443,8 +478,11 @@ public class UIManager : MonoBehaviour
                     value = SetUpgradeWeapon(itemToUpgrade);
                     UpgradeDataList.Add(new UpgradeData(itemToUpgrade.itemName, nameStats, rarity, value));
                     float displayValue = (value - 1) * 100;
-                    string displayString = $"{displayValue:F0}%";
-                    string DisplayBtn = "Upgrade " + itemToUpgrade.itemName  + "\n" + nameStats + " + " + displayString;
+
+                    // if (displayValue < 0)
+                    //     displayValue = displayValue * -1;
+                    // string displayString = $"{displayValue:F0}%";
+                    string DisplayBtn = "Upgrade " + itemToUpgrade.itemName  + "\n" + nameStats + " + " + value;
                     switch (rarity)
                         {
                         case "Commun":
@@ -499,15 +537,17 @@ public class UIManager : MonoBehaviour
                         string varName = champ.Name;
                         if (nameStats == varName)
                         {    
-   
                             object valeurDeLaVariable = champ.GetValue(stats.item); 
                             System.Type typeDeLaVariable = champ.FieldType;
                             if (typeDeLaVariable == typeof(float))
                             {
                                 float value = (float)valeurDeLaVariable;
-                                value += (UpgradeDataList[id].Value - 1);
+                                value += (UpgradeDataList[id].Value);
                                 champ.SetValue(stats.item, value);
-                                Debug.Log($"La stat {champ.Name} de l'item a été modifiée ! Nouvelle valeur : {value}");
+                                if (varName == "Size")
+                                {
+                                    stats.RefreshSize();
+                                }
                             }
                         }
                         index++;
@@ -553,6 +593,7 @@ public class UIManager : MonoBehaviour
                 CurrentHotBarSlot.transform.position = HotBarSlot[CurrentSlotId].transform.position;
         }
     }
+
     public void HotBarManagerKey(int number)
     {
         if (GameData.isPaused)

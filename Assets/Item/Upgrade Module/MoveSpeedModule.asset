@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MoveSpeedModule
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 0
-  itemName: Movement Module
+  itemName: MoveSpeedModule
   itemType: Module
   icon: {fileID: -668177708538896970, guid: f4d968193bbdbd548bb5f782a97eef75, type: 3}
   description: 

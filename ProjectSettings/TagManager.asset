@@ -64,6 +64,9 @@ TagManager:
   - name: Orbital
     uniqueID: 3447787515
     locked: 0
+  - name: UI
+    uniqueID: 4123306005
+    locked: 0
   m_RenderingLayers:
   - Default
   m_MigratedRenderPipelines: []

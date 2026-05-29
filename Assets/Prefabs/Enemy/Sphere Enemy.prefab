@@ -109,6 +109,10 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: b54c6fd2300426a4796422cc9f0bb3bb, type: 2}
   PlayerObj: {fileID: 0}
   WorldObj: {fileID: 0}
+  damagePopupPrefab: {fileID: 6020460614025481897, guid: cd3639c6a2a576e4fbd6116017d40ee5, type: 3}
+  currentCellID: 0
+  currentCoords: {x: 0, y: 0}
+  enemyinCell: 0
 --- !u!61 &3164529977893340400
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,7 +151,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.24, y: 10.24}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

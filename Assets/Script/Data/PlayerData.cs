@@ -6,8 +6,9 @@ public class PlayerData : ScriptableObject
 {
     public float Health;
     public float MaxHealth;
-    public float Xp;
-    public float Gold;
+    public float Souls;
+    public float Blood;
+    public float MaxBlood;
     public float Level;
     public float MoveSpeed;
     public float CritPercent;
@@ -28,8 +29,9 @@ public class PlayerData : ScriptableObject
     {
         this.Health = other.Health;
         this.MaxHealth = other.MaxHealth;
-        this.Xp = other.Xp;
-        this.Gold = other.Gold;
+        this.Souls = other.Souls;
+        this.Blood = other.Blood;
+        this.MaxBlood = other.MaxBlood;
         this.Level = other.Level;
         this.MoveSpeed = other.MoveSpeed;
         this.CritPercent = other.CritPercent;

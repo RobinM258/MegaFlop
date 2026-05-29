@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OrbitalLaser
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 2
-  itemName: Orbital Laser
+  itemName: OrbitalLaser
   itemType: Passive
   icon: {fileID: -4801933062477416177, guid: 173a538626a8e9946a35d4f8d1bec566, type: 3}
   description: 

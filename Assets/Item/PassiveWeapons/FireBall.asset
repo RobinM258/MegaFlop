@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b80b814fa3709eb4083162ad4f1946a3, type: 3}
-  m_Name: FireBalll
+  m_Name: FireBall
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   id: 1
   itemName: FireBall
@@ -18,13 +18,13 @@ MonoBehaviour:
   icon: {fileID: 6445941603473202802, guid: 8c791e5a0a0f314448b53530e6e3ef14, type: 3}
   description: Elle brule
   Level: 1
-  Damage: 1
+  Damage: 7
   Speed: 10
   TotalDamage: 0
   AttackSpeedBase: 3
   AttackSpeed: 1
   PersonalCrit: 0
   PersonnalCritMult: 1
-  Size: 1
+  Size: 0.25
   Bounce: 2
-  ProjectileNumber: 1
+  ProjectileNumber: 2
