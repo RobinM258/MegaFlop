@@ -9,7 +9,7 @@ public static CollisionController Test;
     [SerializeField] private Vector2 mapSize = new Vector2(20f, 20f); 
     [SerializeField] private Vector2 cellSize = new Vector2(2f, 2f); 
     public Dictionary<int, List<GameObject>> gridBuckets = new Dictionary<int, List<GameObject>>();
-    private int lastCellID = -1;
+    //private int lastCellID = -1;
 
     private int columns;
     private int rows;
@@ -18,11 +18,6 @@ public static CollisionController Test;
     {
         if (Test == null) Test = this;
         CalculateGrid();
-    }
-
-    void Update()
-    {
-        LogicDeVoisinage();
     }
 
     private void CalculateGrid()
@@ -156,43 +151,7 @@ public static CollisionController Test;
                 nearbyEntities.AddRange(entitiesInCell);
             }
         }
-        
         return nearbyEntities;
     }
 
-    void LogicDeVoisinage()
-    {
-        List<GameObject> neighbors = CollisionController.Test.GetNearbyEntities(transform.position);
-        //Debug.Log($"Entity {gameObject.name} has {neighbors.Count} neighbors in nearby cells.");
-        Vector2 separationForce = Vector2.zero;
-
-        foreach (GameObject other in neighbors)
-        {
-            if (other == this.gameObject) continue;
-
-            float distance = Vector2.Distance(transform.position, other.transform.position);
-            float repulsionRadius = 0.8f; // Distance à laquelle ils commencent à se pousser
-
-            if (distance < repulsionRadius)
-            {
-                // On calcule un vecteur qui va de l'autre vers moi
-                Vector2 directionAway = (Vector2)transform.position - (Vector2)other.transform.position;
-                
-                // Plus ils sont proches, plus la force est grande
-                float strength = (repulsionRadius - distance) / repulsionRadius;
-                separationForce += directionAway.normalized * strength;
-            }
-        }
-
-        // On applique la force au mouvement (exemple simple)
-        transform.position += (Vector3)separationForce * Time.deltaTime * 2f;
-    }
-
-    private void OnDestroy()
-    {
-        if (CollisionController.Test != null)
-        {
-            CollisionController.Test.UpdateEntityPosition(this.gameObject, lastCellID, -1);
-        }
-    }
 }

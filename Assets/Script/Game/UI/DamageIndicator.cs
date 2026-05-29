@@ -18,17 +18,17 @@ public class DamageIndicator : MonoBehaviour
         }
     }
 
-    public void Setup(float damageAmount)
+    public void Setup(float damageAmount, bool crit)
     {
         if (textMesh == null)
         {
-            Debug.LogError("Le composant Texte est introuvable sur le préfab !");
             return;
         }
 
         textMesh.text = damageAmount.ToString("F0");
         
-        textColor = textMesh.color;
+        if (crit)
+            textMesh.color = Color.red;
     }
 
     private void Update()

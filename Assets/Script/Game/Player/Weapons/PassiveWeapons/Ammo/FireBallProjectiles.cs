@@ -39,8 +39,12 @@ public class FireBallProjectiles : MonoBehaviour
         {
             lastTarget = other.gameObject;
             BasicEnemy target = other.gameObject.GetComponent<BasicEnemy>();
-            Damage = FireBallScript.itemStats.item.Damage + FireBallScript.spellScript.PlayerScript.GetItemStat("Damage", FireBallScript.spellScript.PlayerScript.playerData.UpgradeList);
-            target.GetDamage(Damage);
+            bool iscrit = FireBallScript.spellScript.PlayerScript.GetCrit(FireBallScript.itemStats.item);
+            float critMult = 1f;
+            if (iscrit)
+                critMult = FireBallScript.spellScript.PlayerScript.GetCritMult(FireBallScript.itemStats.item);
+            Damage = ((FireBallScript.itemStats.item.Damage + FireBallScript.spellScript.PlayerScript.GetItemStat("Damage", FireBallScript.spellScript.PlayerScript.playerData.UpgradeList)) * critMult);
+            target.GetDamage(Damage, iscrit);
             BounceLeft--;
             CheckBounce();
         }

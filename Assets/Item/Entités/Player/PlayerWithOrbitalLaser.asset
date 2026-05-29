@@ -14,18 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   Health: 10
   MaxHealth: 10
-  Xp: 0
-  Gold: 0
+  Souls: 0
+  Blood: 0
+  MaxBlood: 0
   Level: 1
   MoveSpeed: 10
-  CritPercent: 0
-  CritMultiplier: 0
+  CritChance: 50
+  CritMultiplier: 2
   AttaqueSpeed: 0
   Armor: 0
   Chance: 0
   InvulnerabilityTime: 1
   Thorns: 0
-  CollectDistance: 0
+  CollectDistance: 2
   PassiveWeaponsList:
   - {fileID: 11400000, guid: 374da5e37e4d546499956da52cccdc81, type: 2}
   ActiveWeaponsList: []

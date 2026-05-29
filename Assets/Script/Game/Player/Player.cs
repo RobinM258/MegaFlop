@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
             ref velocitySmoothing,
             smoothTime
         );
-
+        
         transform.position += (Vector3)(currentVelocity * Time.deltaTime);
     }
 
@@ -189,8 +189,35 @@ public class Player : MonoBehaviour
         return value;
     }
 
-    //COLLISION
+    public bool GetCrit(ItemData item)
+    {
+        float CritPercentage = 0;
 
+        if (item)
+            CritPercentage += item.CritChance;
+        CritPercentage += playerData.CritChance;
+        CritPercentage += GetItemStat("PersonalCrit", playerData.UpgradeList);
+        if (CritPercentage == 0)
+            return false;
+        int rdm = Random.Range(0, 100);
+    
+        if (rdm < CritPercentage)
+            return true;
+        return false;
+    }
+
+    public float GetCritMult(ItemData item)
+    {
+        float CritMult = 0;
+
+        if (item)
+            CritMult += item.CritMult;
+        CritMult += playerData.CritMultiplier;
+        CritMult += GetItemStat("CritMult", playerData.UpgradeList);
+        return CritMult;
+    }
+
+    //COLLISION
     void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && Invulnerability == false)
@@ -198,7 +225,7 @@ public class Player : MonoBehaviour
             BasicEnemy EnemyScript = collision.gameObject.GetComponent<BasicEnemy>();
             GetDamage(EnemyScript.enemyData.Damage);
             if (playerData.Thorns > 0)
-                EnemyScript.GetDamage(playerData.Thorns);
+                EnemyScript.GetDamage(playerData.Thorns, false);
             Invulnerability = true;
         }
     }

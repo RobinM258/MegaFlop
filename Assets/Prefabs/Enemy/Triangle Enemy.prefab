@@ -110,9 +110,11 @@ MonoBehaviour:
   PlayerObj: {fileID: 0}
   WorldObj: {fileID: 0}
   damagePopupPrefab: {fileID: 6020460614025481897, guid: cd3639c6a2a576e4fbd6116017d40ee5, type: 3}
+  SC_DamageIndicatorList: {fileID: 0}
   currentCellID: 0
   currentCoords: {x: 0, y: 0}
-  enemyinCell: 0
+  repulsionRadius: 1.2
+  repulsionForce: 10
 --- !u!61 &3164529977893340400
 BoxCollider2D:
   m_ObjectHideFlags: 0

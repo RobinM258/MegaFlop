@@ -68,8 +68,12 @@ public class OrbitalLaser : MonoBehaviour
                 BasicEnemy enemy = slot.target.GetComponent<BasicEnemy>();
                 if (enemy != null)
                 {
-                    Damage = itemStats.item.Damage + spellScript.PlayerScript.GetItemStat("Damage", spellScript.PlayerScript.playerData.UpgradeList);
-                    enemy.GetDamage(Damage);
+                    bool iscrit = spellScript.PlayerScript.GetCrit(itemStats.item);
+                    float critMult = 1f;
+                    if (iscrit)
+                        critMult = spellScript.PlayerScript.GetCritMult(itemStats.item);
+                    Damage = ((itemStats.item.Damage + spellScript.PlayerScript.GetItemStat("Damage", spellScript.PlayerScript.playerData.UpgradeList)) * critMult);
+                    enemy.GetDamage(Damage, iscrit);
                 }
     
                 enemyBlackList.Remove(slot.target);

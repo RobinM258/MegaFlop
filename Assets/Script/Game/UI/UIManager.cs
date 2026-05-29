@@ -259,7 +259,6 @@ public class UIManager : MonoBehaviour
         float upStats = 0;
         int rdm = SetRarityLoot();
         ItemData itemRef = GetItemRef(item.itemName);
-        Debug.Log(itemRef);
         System.Type typeOfItem = itemRef.GetType();
         FieldInfo[] variables = typeOfItem.GetFields(BindingFlags.Public | BindingFlags.Instance);
          foreach (FieldInfo champ in variables)
@@ -273,6 +272,9 @@ public class UIManager : MonoBehaviour
                 else 
                     value = (float)valeurDeLaVariable;
                 upStats = value * rdm / 10;
+                if (upStats < 0)
+                    upStats =  upStats * -1f;
+                Debug.Log("up stats = " + upStats);
             }
         }
         return upStats;
@@ -477,7 +479,7 @@ public class UIManager : MonoBehaviour
                     choixPris[i] = itemToUpgrade;
                     value = SetUpgradeWeapon(itemToUpgrade);
                     UpgradeDataList.Add(new UpgradeData(itemToUpgrade.itemName, nameStats, rarity, value));
-                    float displayValue = (value - 1) * 100;
+                    float displayValue = value * 100;
 
                     // if (displayValue < 0)
                     //     displayValue = displayValue * -1;

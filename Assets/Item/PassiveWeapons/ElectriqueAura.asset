@@ -23,8 +23,8 @@ MonoBehaviour:
   TotalDamage: 0
   AttackSpeedBase: 1
   AttackSpeed: 1
-  PersonalCrit: 0
-  PersonnalCritMult: 1
+  CritChance: 0
+  CritMult: 0
   Size: 4
   Bounce: 0
   ProjectileNumber: 0

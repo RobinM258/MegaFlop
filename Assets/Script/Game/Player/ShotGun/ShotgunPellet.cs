@@ -17,7 +17,7 @@ public class ShotgunPellet : MonoBehaviour
             BasicEnemy enemy = collision.GetComponent<BasicEnemy>();
             if (enemy != null)
             {
-                enemy.GetDamage(damage);
+                enemy.GetDamage(damage, false);
             }
 
             Destroy(gameObject);

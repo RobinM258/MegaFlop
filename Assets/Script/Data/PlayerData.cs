@@ -11,7 +11,7 @@ public class PlayerData : ScriptableObject
     public float MaxBlood;
     public float Level;
     public float MoveSpeed;
-    public float CritPercent;
+    public float CritChance;
     public float CritMultiplier;
     public float AttaqueSpeed;
     public float Armor;
@@ -34,7 +34,7 @@ public class PlayerData : ScriptableObject
         this.MaxBlood = other.MaxBlood;
         this.Level = other.Level;
         this.MoveSpeed = other.MoveSpeed;
-        this.CritPercent = other.CritPercent;
+        this.CritChance = other.CritChance;
         this.CritMultiplier = other.CritMultiplier;
         this.AttaqueSpeed = other.AttaqueSpeed;
         this.Armor = other.Armor;

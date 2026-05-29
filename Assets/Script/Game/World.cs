@@ -26,7 +26,7 @@ public class World : MonoBehaviour
     private float timerUpdate;
     private Player playerScript;
     public List<GameObject> enemyList = new List<GameObject>();
-    public List<GameObject> orbList = new List<GameObject>();
+    public List<GameObject> SoulsList = new List<GameObject>();
     private BasicEnemy EnemyScript;
 
     [Header("Réglage XP")]
@@ -77,33 +77,25 @@ public class World : MonoBehaviour
         }
         if (timerUpdate >= GameData.updateInterval)
         {
-            EnemyHandler();
+            SoulHandler();
             timerUpdate = 0f;
         }
     }
 
-    void EnemyHandler()
+    void SoulHandler()
     {
-        for (int i = 0; i < enemyList.Count; i++)
-        {
-            if (enemyList[i] == null) 
-                continue;
-            Vector3 direction = player.transform.position - enemyList[i].transform.position;
-            EnemyScript = enemyList[i].GetComponent<BasicEnemy>();
-            enemyList[i].transform.position += direction.normalized * EnemyScript.enemyData.MovementSpeed * GameData.updateInterval;
-        }
 
-        for (int i = 0; i < orbList.Count; i++)
+        for (int i = 0; i < SoulsList.Count; i++)
         {
-            Vector3 direction = player.transform.position - orbList[i].transform.position;
+            Vector3 direction = player.transform.position - SoulsList[i].transform.position;
             if (direction.magnitude <= playerScript.playerData.CollectDistance && direction.magnitude > 1)
-                orbList[i].transform.position += direction.normalized * 10 * GameData.updateInterval;
+                SoulsList[i].transform.position += direction.normalized * 4 * GameData.updateInterval;
             else if (direction.magnitude <= 1)
             {
-                GameObject current = orbList[i];
+                GameObject current = SoulsList[i];
                 XpOrb xp = current.GetComponent<XpOrb>();
                 playerScript.AddSouls(xp.xpValue);
-                orbList.Remove(current);
+                SoulsList.Remove(current);
                 Destroy(current);
             }
         }
@@ -121,7 +113,7 @@ public class World : MonoBehaviour
             {
                 Vector3 spawnPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y, -1.4f);
                 GameObject newSoul = Instantiate(XpOrb[0], spawnPos, Quaternion.identity, SC_SoulsList);
-                orbList.Add(newSoul);
+                SoulsList.Add(newSoul);
             }
             playerScript.EnemyKill++;   
             playerScript.UiScript.DisplayNumberKill(playerScript.EnemyKill);

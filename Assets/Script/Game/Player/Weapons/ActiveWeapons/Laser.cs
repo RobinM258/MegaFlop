@@ -83,7 +83,7 @@ public class Laser : MonoBehaviour
                 BasicEnemy enemy = hit.GetComponent<BasicEnemy>();
                 if (enemy != null)
                 {
-                    enemy.GetDamage(damage);
+                    enemy.GetDamage(damage, false);
                 }
             }
             else if (hit.CompareTag("Tree"))

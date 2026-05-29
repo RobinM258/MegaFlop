@@ -47,8 +47,12 @@ public class Aura : MonoBehaviour
                 BasicEnemy targetScript = target.GetComponent<BasicEnemy>();
                 if (targetScript != null) 
                 {
-                    Damage = itemStats.item.Damage + spellScript.PlayerScript.GetItemStat("Damage", spellScript.PlayerScript.playerData.UpgradeList);
-                    targetScript.GetDamage(Damage);
+                    bool iscrit = spellScript.PlayerScript.GetCrit(itemStats.item);
+                    float critMult = 1f;
+                    if (iscrit)
+                        critMult = spellScript.PlayerScript.GetCritMult(itemStats.item);
+                    Damage = ((itemStats.item.Damage + spellScript.PlayerScript.GetItemStat("Damage", spellScript.PlayerScript.playerData.UpgradeList)) * critMult);
+                    targetScript.GetDamage(Damage, iscrit);
                 }
             }
             timer = 0f;

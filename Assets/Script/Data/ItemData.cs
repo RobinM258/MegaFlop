@@ -15,8 +15,8 @@ public class ItemData : ScriptableObject
     public float TotalDamage;
     public float AttackSpeedBase;
     public float AttackSpeed;
-    public float PersonalCrit;
-    public float PersonnalCritMult;
+    public float CritChance;
+    public float CritMult;
     public float Size;
     public float Bounce;
     public float ProjectileNumber;
@@ -34,8 +34,8 @@ public class ItemData : ScriptableObject
         this.TotalDamage = other.TotalDamage;
         this.AttackSpeedBase = other.AttackSpeedBase;
         this.AttackSpeed = other.AttackSpeed;
-        this.PersonalCrit = other.PersonalCrit;
-        this.PersonnalCritMult = other.PersonnalCritMult;
+        this.CritChance = other.CritChance;
+        this.CritMult = other.CritMult;
         this.Size = other.Size;
         this.Bounce = other.Bounce;
         this.ProjectileNumber = other.ProjectileNumber;
